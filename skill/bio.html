@@ -1,0 +1,851 @@
+<!--- Rebuilt by Xellie to match originsRO ---> 
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link id="csslink" rel="stylesheet" href="skill.css" type="text/css">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+<title>Biochemist</title>
+<style>
+body{
+	font-size:9pt;
+	background-image:url(img/back_crh.png);
+	background-repeat:no-repeat;
+	background-color: #61ca89;
+}
+</style>
+<script language="JavaScript" src="menu.js"></script>
+<script language="JavaScript" src="skill4.js"></script>
+<script language="JavaScript" src="skill2.js"></script>
+<script language="JavaScript" src="skilllist.js"></script>
+<script language="JavaScript">
+
+var CART_P = DISC_P = IDEN_P = INCC_P
+	= MAMM_P = OVRC_P = VEND_P
+	= AXEM_P = LRNP_P = PHMC_P = DMST_P
+	= ACDT_P = PTPC_P = BCNB_P = SPHM_P
+	= CPWP_P = CPSH_P = CPAM_P = CPHM_P
+	= SLPP_P = FCPR_P = ACDM_P = PLCL_P
+	= CLHM_P = REST_P = RSHM_P
+	= 0;
+
+
+var use1 = use2 = 0;
+var JCHF_P = 50;
+var ver = "10";
+
+var CART_M = 10;
+var DISC_M = 10;
+var IDEN_M = 1;
+var INCC_M = 10;
+var MAMM_M = 10;
+var OVRC_M = 10;
+var VEND_M = 10;
+
+var AXEM_M = 10;
+var LRNP_M = 10;
+var PHMC_M = 10;
+var DMST_M = 5;
+var ACDT_M = 5;
+var PTPC_M = 5;
+var BCNB_M = 5;
+var SPHM_M = 5;
+var CPWP_M = 5;
+var CPSH_M = 5;
+var CPAM_M = 5;
+var CPHM_M = 5;
+var CLHM_M = 1;
+var REST_M = 1;
+var RSHM_M = 5;
+
+var SLPP_M = 10;
+var FCPR_M = 5;
+var ACDM_M = 10;
+var PLCL_M = 2;
+
+// 各スキルの条件
+// 商人
+
+function CART_F(){
+	Point(CART_P,10,"CART");
+	if(CART_P<3){
+		Disable("VEND"); if(VEND_P>0){ VEND_P=0; VEND_F();}
+	}if(CART_P>=3){
+		Visible("VEND");
+	}if(INCC_P<5 && CART_P>0){
+		INCC_P=5; Visible("CART"); INCC_F();
+	}
+}
+function DISC_F(){
+	Point(DISC_P,10,"DISC");
+	if(DISC_P<3){
+		Disable("OVRC"); if(OVRC_P>0){ OVRC_P=0; OVRC_F();}
+	}if(DISC_P>=3){
+		Visible("OVRC");
+	}if(INCC_P<3 && DISC_P>0){
+		INCC_P=3; Visible("DISC"); INCC_F();
+	}
+}
+function IDEN_F(){
+	Point(IDEN_P,1,"IDEN");
+}
+function INCC_F(){
+	Point(INCC_P,10,"INCC");
+	if(INCC_P<3){
+		Disable("DISC"); if(DISC_P>0){ DISC_P=0; DISC_F();}
+	}if(INCC_P>=3){
+		Visible("DISC");
+	}if(INCC_P<5){
+		Disable("CART"); if(CART_P>0){ CART_P=0; CART_F();}
+	}if(INCC_P>=5){
+		Visible("CART");
+	}
+}
+function MAMM_F(){
+	Point(MAMM_P,10,"MAMM");
+}
+function OVRC_F(){
+	Point(OVRC_P,10,"OVRC");
+	if(DISC_P<3 && OVRC_P>0){
+		DISC_P=3; Visible("OVRC"); DISC_F();
+	}
+}
+function VEND_F(){
+	Point(VEND_P,10,"VEND");
+	if(CART_P<3 && VEND_P>0){
+		CART_P=3; Visible("VEND"); CART_F();
+	}
+}
+
+// アルケミスト
+
+function AXEM_F(){	Point(AXEM_P,10,"AXEM");}
+function LRNP_F(){
+	Point(LRNP_P,10,"LRNP");
+	if(LRNP_P<5){
+		Disable("PHMC"); if(PHMC_P>0){ PHMC_P=0; PHMC_F();}
+	}if(LRNP_P>=5){
+		Visible("PHMC");
+	}
+}
+function PHMC_F(){
+	Point(PHMC_P,10,"PHMC");
+	if(PHMC_P<2){
+		Disable("SPHM"); if(SPHM_P>0){ SPHM_P=0; SPHM_F();}
+		Disable("CPHM"); if(CPHM_P>0){ CPHM_P=0; CPHM_F();}
+	}if(PHMC_P>=2){
+		Visible("SPHM"); Visible("CPHM");
+	}if(PHMC_P<3){
+		Disable("PTPC"); if(PTPC_P>0){ PTPC_P=0; PTPC_F();}
+	}if(PHMC_P>=3){
+		Visible("PTPC");
+	}if(PHMC_P<4){
+		Disable("DMST"); if(DMST_P>0){ DMST_P=0; DMST_F();}
+	}if(PHMC_P>=4){
+		Visible("DMST");
+	}if(PHMC_P<5){
+		Disable("ACDT"); if(ACDT_P>0){ ACDT_P=0; ACDT_F();}
+	}if(PHMC_P>=5){
+		Visible("ACDT");
+	}if(PHMC_P<6){
+		Disable("BCNB"); if(BCNB_P>0){ BCNB_P=0; BCNB_F();}
+	}if(PHMC_P>=6){
+		Visible("BCNB");
+	}if(LRNP_P<5 && PHMC_P>0){
+		LRNP_P=5; Visible("PHMC"); LRNP_F();
+	}
+}
+function DMST_F(){
+	Point(DMST_P,5, "DMST");
+	if(DMST_P<5){
+		Disable("ACDM"); if(ACDM_P>0){ ACDM_P=0; ACDM_F();}
+	}if(DMST_P>=5 && ACDT_P>=5){
+		Visible("ACDM");
+	}if(PHMC_P<4 && DMST_P>0){
+		PHMC_P=4; Visible("DMST"); PHMC_F();
+	}
+}
+function ACDT_F(){
+	Point(ACDT_P,5, "ACDT");
+	if(ACDT_P<5){
+		Disable("ACDM"); if(ACDM_P>0){ ACDM_P=0; ACDM_F();}
+	}if(ACDT_P>=5 && DMST_P>=5){
+		Visible("ACDM");
+	}if(PHMC_P<5 && ACDT_P>0){
+		PHMC_P=5; Visible("ACDT"); PHMC_F();
+	}
+}
+function PTPC_F(){
+	Point(PTPC_P,5, "PTPC");
+	if(PTPC_P<5){
+		Disable("SLPP"); if(SLPP_P>0){ SLPP_P=0; SLPP_F();}
+	}if(PTPC_P>=5){
+		Visible("SLPP");
+	}if(PHMC_P<3 && PTPC_P>0){
+		PHMC_P=3; Visible("PTPC"); PHMC_F();
+	}
+}
+function BCNB_F(){
+	Point(BCNB_P,5, "BCNB");
+	if(PHMC_P<6 && BCNB_P>0){
+		PHMC_P=6; Visible("BCNB"); PHMC_F();
+	}
+}
+function SPHM_F(){
+	Point(SPHM_P,5, "SPHM");
+	if(PHMC_P<2 && SPHM_P>0){
+		PHMC_P=2; Visible("SPHM"); PHMC_F();
+	}
+}
+function CPWP_F(){
+	Point(CPWP_P,5, "CPWP");
+	if(CPWP_P<5){
+		Disable("FCPR"); if(FCPR_P>0){ FCPR_P=0; FCPR_F();}
+	}if(CPWP_P>=5 && CPSH_P>=5 && CPAM_P>=5 && CPHM_P>=5){
+		Visible("FCPR");
+	}if(CPAM_P<3 && CPWP_P>0){
+		CPAM_P=3; Visible("CPWP"); CPAM_F();
+	}
+}
+function CPSH_F(){
+	Point(CPSH_P,5, "CPSH");
+	if(CPSH_P<3){
+		Disable("CPAM"); if(CPAM_P>0){ CPAM_P=0; CPAM_F();}
+	}if(CPSH_P>=3){
+		Visible("CPAM");
+	}if(CPSH_P<5){
+		Disable("FCPR"); if(FCPR_P>0){ FCPR_P=0; FCPR_F();}
+	}if(CPSH_P>=5 && CPAM_P>=5 && CPHM_P>=5 && CPWP_P>=5){
+		Visible("FCPR");
+	}if(CPHM_P<3 && CPSH_P>0){
+		CPHM_P=3; Visible("CPSH"); CPHM_F();
+	}
+}
+function CPAM_F(){
+	Point(CPAM_P,5, "CPAM");
+	if(CPAM_P<3){
+		Disable("CPWP"); if(CPWP_P>0){ CPWP_P=0; CPWP_F();}
+	}if(CPAM_P>=3){
+		Visible("CPWP");
+	}if(CPAM_P<5){
+		Disable("FCPR"); if(FCPR_P>0){ FCPR_P=0; FCPR_F();}
+	}if(CPAM_P>=5 && CPHM_P>=5 && CPWP_P>=5 && CPSH_P>=5){
+		Visible("FCPR");
+	}if(CPSH_P<3 && CPAM_P>0){
+		CPSH_P=3; Visible("CPAM"); CPSH_F();
+	}
+}
+function CPHM_F(){
+	Point(CPHM_P,5, "CPHM");
+	if(CPHM_P<3){
+		Disable("CPSH"); if(CPSH_P>0){ CPSH_P=0; CPSH_F();}
+	}if(CPHM_P>=3){
+		Visible("CPSH");
+	}if(CPHM_P<5){
+		Disable("FCPR"); if(FCPR_P>0){ FCPR_P=0; FCPR_F();}
+	}if(CPHM_P>=5 && CPWP_P>=5 && CPSH_P>=5 && CPAM_P>=5){
+		Visible("FCPR");
+	}if(PHMC_P<2 && CPHM_P>0){
+		PHMC_P=2; Visible("CPHM"); PHMC_F();
+	}
+}
+// Creator
+function SLPP_F(){
+	Point(SLPP_P,10, "SLPP");
+	if(PTPC_P<5 && SLPP_P>0){
+		PTPC_P=5; Visible("SLPP"); PTPC_F();
+	}
+}
+function FCPR_F(){
+	Point(FCPR_P,5, "FCPR");
+	if(CPHM_P<5 && FCPR_P>0){
+		CPHM_P=5; Visible("FCPR"); CPHM_F();
+	}if(CPSH_P<5 && FCPR_P>0){
+		CPSH_P=5; Visible("FCPR"); CPSH_F();
+	}if(CPAM_P<5 && FCPR_P>0){
+		CPAM_P=5; Visible("FCPR"); CPAM_F();
+	}if(CPWP_P<5 && FCPR_P>0){
+		CPWP_P=5; Visible("FCPR"); CPWP_F();
+	}
+}
+function ACDM_F(){
+	Point(ACDM_P,10,"ACDM");
+	if(DMST_P<5 && ACDM_P>0){
+		DMST_P=5; Visible("ACDM"); DMST_F();
+	}if(ACDT_P<5 && ACDM_P>0){
+		ACDT_P=5; Visible("ACDM"); ACDT_F();
+	}
+}
+function PLCL_F(){
+	Point(PLCL_P,2, "PLCL");
+}
+
+// ホムンクルススキル
+function CLHM_F(){
+	Point(CLHM_P,1, "CLHM");
+	if(CLHM_P<1){
+		Disable("RSHM"); if(RSHM_P>0){ RSHM_P=0; RSHM_F();}
+	}if(CLHM_P>=1){
+		Visible("RSHM");
+	}if(REST_P<1 && CLHM_P>0){
+		REST_P=1; Visible("CLHM"); REST_F();
+	}
+}
+function REST_F(){
+	Point(REST_P,1, "REST");
+	if(REST_P<1){
+		Disable("CLHM"); if(CLHM_P>0){ CLHM_P=0; CLHM_F();}
+	}if(REST_P>=1){
+		Visible("CLHM");
+	}
+}
+function RSHM_F(){
+	Point(RSHM_P,5, "RSHM");
+	if(CLHM_P<1 && RSHM_P>0){
+		CLHM_P=1; Visible("RSHM"); CLHM_F();
+	}
+}
+
+// イベント
+function setPoint(parts,point){
+	if(parts == "CART") { if(point>=0 && point<=10) CART_P=point; CART_F(); }
+	if(parts == "DISC") { if(point>=0 && point<=10) DISC_P=point; DISC_F(); }
+	if(parts == "IDEN") { if(point>=0 && point<=1 ) IDEN_P=point; IDEN_F(); }
+	if(parts == "INCC") { if(point>=0 && point<=10) INCC_P=point; INCC_F(); }
+	if(parts == "MAMM") { if(point>=0 && point<=10) MAMM_P=point; MAMM_F(); }
+	if(parts == "OVRC") { if(point>=0 && point<=10) OVRC_P=point; OVRC_F(); }
+	if(parts == "VEND") { if(point>=0 && point<=10) VEND_P=point; VEND_F(); }
+
+	if(parts == "AXEM") { if(point>=0 && point<=10) AXEM_P=point; AXEM_F(); }
+	if(parts == "LRNP") { if(point>=0 && point<=10) LRNP_P=point; LRNP_F(); }
+	if(parts == "PHMC") { if(point>=0 && point<=10) PHMC_P=point; PHMC_F(); }
+	if(parts == "DMST") { if(point>=0 && point<=5 ) DMST_P=point; DMST_F(); }
+	if(parts == "ACDT") { if(point>=0 && point<=5 ) ACDT_P=point; ACDT_F(); }
+	if(parts == "PTPC") { if(point>=0 && point<=5 ) PTPC_P=point; PTPC_F(); }
+	if(parts == "BCNB") { if(point>=0 && point<=5 ) BCNB_P=point; BCNB_F(); }
+	if(parts == "SPHM") { if(point>=0 && point<=5 ) SPHM_P=point; SPHM_F(); }
+	if(parts == "CPWP") { if(point>=0 && point<=5 ) CPWP_P=point; CPWP_F(); }
+	if(parts == "CPSH") { if(point>=0 && point<=5 ) CPSH_P=point; CPSH_F(); }
+	if(parts == "CPAM") { if(point>=0 && point<=5 ) CPAM_P=point; CPAM_F(); }
+	if(parts == "CPHM") { if(point>=0 && point<=5 ) CPHM_P=point; CPHM_F(); }
+
+	if(parts == "SLPP") { if(point>=0 && point<=10) SLPP_P=point; SLPP_F(); }
+	if(parts == "FCPR") { if(point>=0 && point<=5 ) FCPR_P=point; FCPR_F(); }
+	if(parts == "ACDM") { if(point>=0 && point<=10) ACDM_P=point; ACDM_F(); }
+	if(parts == "PLCL") { if(point>=0 && point<=2 ) PLCL_P=point; PLCL_F(); }
+
+	if(parts == "CLHM") { if(point>=0 && point<=1 ) CLHM_P=point; CLHM_F(); }
+	if(parts == "REST") { if(point>=0 && point<=1 ) REST_P=point; REST_F(); }
+	if(parts == "RSHM") { if(point>=0 && point<=5 ) RSHM_P=point; RSHM_F(); }
+
+	ShowPoint();
+}
+
+function ShowPoint(){
+	use1 = CART_P + DISC_P + IDEN_P + INCC_P
+		+ MAMM_P + OVRC_P + VEND_P;
+	use2 = AXEM_P + LRNP_P + PHMC_P + DMST_P
+		+ ACDT_P + PTPC_P + BCNB_P + SPHM_P
+		+ CPWP_P + CPSH_P + CPAM_P + CPHM_P
+		+ SLPP_P + FCPR_P + ACDM_P + PLCL_P
+		+ CLHM_P + REST_P + RSHM_P;
+	showMsg(1);
+}
+
+//コントロール関連
+function Clear(){
+	CART_P = DISC_P = IDEN_P = INCC_P
+	= MAMM_P = OVRC_P = VEND_P
+	= AXEM_P = LRNP_P = PHMC_P = DMST_P
+	= ACDT_P = PTPC_P = BCNB_P = SPHM_P
+	= CPWP_P = CPSH_P = CPAM_P = CPHM_P
+	= SLPP_P = FCPR_P = ACDM_P = PLCL_P
+	= CLHM_P = REST_P = RSHM_P
+	= 0;
+	use1 = use2 = 0;
+	CART_F(); DISC_F(); IDEN_F(); INCC_F();
+	MAMM_F(); OVRC_F(); VEND_F();
+	AXEM_F(); LRNP_F(); PHMC_F(); DMST_F();
+	ACDT_F(); PTPC_F(); BCNB_F(); SPHM_F();
+	CPWP_F(); CPSH_F(); CPAM_F(); CPHM_F();
+	SLPP_F(); FCPR_F(); ACDM_F(); PLCL_F();
+	CLHM_F(); REST_F(); RSHM_F();
+	ShowPoint();
+	setAlertLayer("All Points have been cleared.",1);
+}
+
+function Save(mode){
+	var tdata = new Array(27);
+	tdata[0]  = CART_P;
+	tdata[1]  = DISC_P;
+	tdata[2]  = IDEN_P;
+	tdata[3]  = INCC_P;
+	tdata[4]  = MAMM_P;
+	tdata[5]  = OVRC_P;
+	tdata[6]  = VEND_P;
+	tdata[7]  = AXEM_P;
+	tdata[8]  = LRNP_P;
+	tdata[9]  = PHMC_P;
+	tdata[10] = DMST_P;
+	tdata[11] = ACDT_P;
+	tdata[12] = PTPC_P;
+	tdata[13] = BCNB_P;
+	tdata[14] = SPHM_P;
+	tdata[15] = CPWP_P;
+	tdata[16] = CPSH_P;
+	tdata[17] = CPAM_P;
+	tdata[18] = CPHM_P;
+	tdata[19] = SLPP_P;
+	tdata[20] = FCPR_P;
+	tdata[21] = ACDM_P;
+	tdata[22] = PLCL_P;
+	tdata[23] = CLHM_P;
+	tdata[24] = REST_P;
+	tdata[25] = RSHM_P;
+	tdata[26] = JCHF_P - 40;
+
+	code = encode(tdata,ver);
+
+	if(mode == "scode"){
+		return code;
+	}if(mode == "cookie"){
+		Save2(code);
+	}
+
+}
+
+function Load(mode){
+	code = loadType(mode);
+	if(code){
+		tdata = decode(code,ver);
+
+		CART_P = tdata[0] ;
+		DISC_P = tdata[1] ;
+		IDEN_P = tdata[2] ;
+		INCC_P = tdata[3] ;
+		MAMM_P = tdata[4] ;
+		OVRC_P = tdata[5] ;
+		VEND_P = tdata[6] ;
+		AXEM_P = tdata[7] ;
+		LRNP_P = tdata[8] ;
+		PHMC_P = tdata[9] ;
+		DMST_P = tdata[10];
+		ACDT_P = tdata[11];
+		PTPC_P = tdata[12];
+		BCNB_P = tdata[13];
+		SPHM_P = tdata[14];
+		CPWP_P = tdata[15];
+		CPSH_P = tdata[16];
+		CPAM_P = tdata[17];
+		CPHM_P = tdata[18];
+		SLPP_P = tdata[19];
+		FCPR_P = tdata[20];
+		ACDM_P = tdata[21];
+		PLCL_P = tdata[22];
+		CLHM_P = tdata[23];
+		REST_P = tdata[24];
+		RSHM_P = tdata[25];
+		JCHF_P = tdata[26] + 40;
+	}
+
+	document.Msg.jobchg1.value = JCHF_P;
+
+	CART_F(); DISC_F(); IDEN_F(); INCC_F();
+	MAMM_F(); OVRC_F(); VEND_F();
+	AXEM_F(); LRNP_F(); PHMC_F(); DMST_F();
+	ACDT_F(); PTPC_F(); BCNB_F(); SPHM_F();
+	CPWP_F(); CPSH_F(); CPAM_F(); CPHM_F();
+	SLPP_F(); FCPR_F(); ACDM_F(); PLCL_F();
+	CLHM_F(); REST_F(); RSHM_F();
+
+	ShowPoint();
+}
+
+</script>
+
+</head>
+<div id="bgimg"><img style="filter: drop-shadow(5px 5px 5px #222);" src="img/bio.png"/></div>
+
+
+
+
+
+<body onload="Init()" onmousewheel="return false;">
+
+<div id="msgid" style="position: absolute; top: 8px; left: 10px; width: 340px; padding: 3px; background-color: rgb(255, 255, 255);"> 1st : <span style="color:#aa0033;">1</span>/50 　2nd : <span style="color:#aa0033;">25</span>/70　rest : 94</div>
+<div style="position:absolute; top:5px; left:390px; width:900px;">
+<form name="Msg">
+
+<select name="jobchg1" onchange="JCHF_P=this.value; showMsg()">
+<option value="50" selected="selected">Job50
+</option><option value="49">Job49
+
+</option><option value="48">Job48
+</option><option value="47">Job47
+</option><option value="46">Job46
+</option><option value="45">Job45
+</option><option value="44">Job44
+</option><option value="43">Job43
+</option><option value="42">Job42
+</option><option value="41">Job41
+</option><option value="40">Job40
+</option></select>
+
+　　
+<input type="hidden" name="scode" size="32" value="" readonly="">
+
+<span class="saveoptions_bio">
+Saved Builds </br>
+<select name="Data" style="width:200px;">
+<option value="1">slot 1 : (pro) </option><option value="2" style="background-color: rgb(204, 204, 204);">slot 2 : (bio) </option><option value="3" style="background-color: rgb(204, 204, 204);">slot 3 : (gyp) </option><option value="4">slot 4 : (pro) </option><option value="5" style="background-color: rgb(204, 204, 204);">slot 5 : (hwz) </option><option value="6">slot 6 : no save</option><option value="7">slot 7 : no save</option><option value="8">slot 8 : no save</option><option value="9">slot 9 : no save</option><option value="10">slot 10 : no save</option><option value="11">slot 11 : no save</option><option value="12">slot 12 : no save</option><option value="13">slot 13 : no save</option><option value="14">slot 14 : no save</option><option value="15">slot 15 : no save</option><option value="16">slot 16 : no save</option><option value="17">slot 17 : no save</option><option value="18">slot 18 : no save</option><option value="19">slot 19 : no save</option><option value="20">slot 20 : no save</option><option value="21">slot 21 : no save</option><option value="22">slot 22 : no save</option><option value="23">slot 23 : no save</option><option value="24">slot 24 : no save</option><option value="25">slot 25 : no save</option><option value="26">slot 26 : no save</option><option value="27">slot 27 : no save</option><option value="28">slot 28 : no save</option><option value="29">slot 29 : no save</option><option value="30">slot 30 : no save</option></select> </br> <p>
+Character Name </br><input type="text" name="chrName" size="20" maxlength="20" title="Name your save slot" style="background-color: #fff; border: 1px solid dimgrey;">　</br> <p>
+<a class="con" href="javascript:Save('cookie');" title="Save to Cookie"> Save Build</a> <a class="con" href="javascript:Load('cookie');" title="Load from Cookie">Load Build</a></br>
+
+<a class="con" href="javascript:Reset();" title="Clear all points">Reset Build</a>
+<a class="con" href="javascript:DeleteSlot();" title="Delete Save Slot">Delete Save Data</a></br>
+<a class="con" href="javascript:codeCopy();" title="Skill Points to URL">Save as URL</a>
+<a class="con" href="JavaScript:setOption2Layer();" title="Show as Text">Show as Text</a> </br>
+
+</form>
+
+
+
+</span>
+
+
+
+
+
+
+</div>
+<div id="navmenu_bio">
+
+<div class="dropdown" style=" min-width:350px";>
+  <button onclick="myFunction()" class="dropbtn">Change Job</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="hpr.html">High Priest</a><a href="chp.html">Champion</a> </br>
+    <a href="snp.html" style="width: 55px;">Sniper</a>  <a href="clw.html" style="width: 55px;">Minstrel</a>  <a href="gyp.html" style="width: 55px;">Gypsy</a> </br>
+	    <a href="hwz.html">High Wizard</a><a href="pro.html">Scholar</a> </br>
+		    <a href="wsm.html">Mastersmith</a><a href="bio.html">Biochemist</a> </br>
+			    <a href="lkt.html">Lord Knight</a><a href="pld.html">Paladin</a> </br>
+			    <a href="asc.html">Assassin Cross</a><a href="stk.html">Stalker</a> </br>
+  </div>
+  <a class="homebtn" href="https://xellie.com/RO/skill/" title="Home">Homepage</a>　
+</div>
+
+</div>
+
+<!-- Merchant -->
+
+
+<table class="job" id="CART" style="position: absolute; top: 100px; left: 430px; background-position: -840px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_mer.png'); background-position:0px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CART')" onmouseout="msout()">
+Push Cart
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="DISC" style="position: absolute; top: 50px; left: 430px; background-position: -840px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_mer.png'); background-position:-30px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'DISC')" onmouseout="msout()">
+Discount
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="IDEN" style="position: absolute; top: 50px; left: 30px; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_mer.png'); background-position:-60px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'IDEN')" onmouseout="msout()">
+Item Appraisal</span></td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="INCC" style="position: absolute; top: 50px; left: 230px; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_mer.png'); background-position:-90px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'INCC')" onmouseout="msout()">
+Enlarge Weight Limit
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="MAMM" style="position: absolute; top: 100px; left: 30px; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_mer.png'); background-position:-120px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'MAMM')" onmouseout="msout()">
+Mammonite
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="OVRC" style="position: absolute; top: 50px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_mer.png'); background-position:-150px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'OVRC')" onmouseout="msout()">
+Overcharge
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="VEND" style="position: absolute; top: 100px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_mer.png'); background-position:-180px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'VEND')" onmouseout="msout()">
+Vending
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<!-- Alchemist -->
+
+
+<table class="job" id="AXEM" style="position: absolute; top: 160px; left: 30px; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:0px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'LRNP')" onmouseout="msout()">
+Axe Mastery
+</span></td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="LRNP" style="position: absolute; top: 260px; left: 30px; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-30px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'LRNP')" onmouseout="msout()">
+Potion Research
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="PHMC" style="position: absolute; top: 260px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-60px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'PHMC')" onmouseout="msout()">
+Pharmacy
+</span></td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="DMST" style="position: absolute; top: 260px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-90px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'DMST')" onmouseout="msout()">Bomb</span></td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="ACDT" style="position: absolute; top: 310px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-120px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'ACDT')" onmouseout="msout()">
+Acid Terror
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="PTPC" style="position: absolute; top: 210px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-150px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'PTPC')" onmouseout="msout()">
+Potion Pitcher
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="BCNB" style="position: absolute; top: 420px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-180px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'BCNB')" onmouseout="msout()">
+Bio Cannibalize 
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="SPHM" style="position: absolute; top: 160px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-210px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SPHM')" onmouseout="msout()">
+S<span style="font-size: 8.5pt">ummon Marine Sphere</span>
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="CPWP" style="position: absolute; top: 470px; left: 630px; background-position: -560px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-240px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CPWP')" onmouseout="msout()">
+Alchemical Weapon
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="CPSH" style="position: absolute; top: 470px; left: 230px; background-position: -560px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-270px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CPSH')" onmouseout="msout()">
+Synthesized Shield
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="CPAM" style="position: absolute; top: 470px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-300px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CPAM')" onmouseout="msout()">
+Synthetic Armor
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="CPHM" style="position: absolute; top: 470px; left: 30px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-330px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CPHM')" onmouseout="msout()">
+Biochemical Helm
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<!-- Homunculus skill -->
+
+
+<table class="quest" id="BETH" style="position:absolute; top:570px; left:30px;" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-360px; background-color:#FFFFCC" width="26" bgcolor="#FFFFCC">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'BETH')" onmouseout="msout()">
+Bioethics
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="CLHM" style="position: absolute; top: 570px; left: 430px; background-position: 0px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-390px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CLHM')" onmouseout="msout()">
+Call Homunculus
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="REST" style="position: absolute; top: 570px; left: 230px; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-420px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'REST')" onmouseout="msout()">
+Rest</span></td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="RSHM" style="position: absolute; top: 570px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_alc.png'); background-position:-450px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'RSHM')" onmouseout="msout()">
+Homun Ressurection
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<!-- Creator -->
+
+
+<table class="job" id="SLPP" style="position: absolute; top: 210px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cre.png'); background-position:0px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SLPP')" onmouseout="msout()">
+		Slim Potion Pitcher
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="FCPR" style="position: absolute; top: 520px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cre.png'); background-position:-30px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'FCPR')" onmouseout="msout()">
+      <span style="font-size: 7.5pt">Full Chemical Protection</span>
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="ACDM" style="position: absolute; top: 260px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cre.png'); background-position:-60px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'ACDM')" onmouseout="msout()">
+Acid Demonstration
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="PLCL" style="position: absolute; top: 210px; left: 30px; background-position: -140px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cre.png'); background-position:-90px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'PLCL')" onmouseout="msout()">
+		Plant Cultivation
+</span>
+</td></tr><tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<!--Quest Skills-->
+<table class="quest" id="CHGC" style="position:absolute; top:50px; left:1030px; background-color:#FFFFCC" width="130" height="15" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFCC">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_quest.png'); background-position:0px;" width="26" align="center">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CHGC')" onmouseout="msout()">Change Cart</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<table class="quest" id="CRVL" style="position:absolute; top:50px; left:830px; background-color:#FFFFCC" width="130" height="15" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFCC">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_quest.png'); background-position:0px;" width="26" align="center">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CRVL')" onmouseout="msout()">Cart Revolution</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<table class="quest" id="LOUD" style="position:absolute; top:100px; left:830px; background-color:#FFFFCC" width="130" height="15" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFCC">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_quest.png'); background-position:0px;" width="26" align="center">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'LOUD')" onmouseout="msout()">Crazy Uproar</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<div id="skill" style="position:absolute; z-index:1;"></div>
+<div id="option1" style="position:absolute; top:0px; left:0px; width:0px; height:0px; background-image:url(img/alpha.png);" onclick="JavaScript:offOptionLayer();"></div>
+<div id="option2" style="position:absolute; top:0px; left:0px; width:0px; height:0px;"></div>
+<div id="dummy" style="position:absolute; top:0px; left:0px; width:1200px; height:800px; z-index:-1;"></div>
+
+
+</body></html>

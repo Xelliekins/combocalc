@@ -1,0 +1,668 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<title>ROratorio's CalcX [PvP Beta] (English Version) - Ragnarok Online Calculator</title>
+<meta name="keywords" content="Ragnarok,Online,Ragnarok Online,iRO,euRO,ROratorio,PVP,PVM,WOE,MVP,Calc,CalcX,Calculator,New,Current,Episode,12.1,13.1,13.2">
+<meta name="description" content="The Ragnarok Online Calculator by ROratorio, able to simulate stats, equipment, status resistance, skills and damage from Characters in PVM, MVP and PVP environments">
+
+<script language="JavaScript"><!--
+Lang = 0;
+Taijin=1;
+// --></script>
+<script language="JavaScript" src="js/head.js"></script>
+<script language="JavaScript" src="js/item.js"></script>
+<script language="JavaScript" src="js/etc.js"></script>
+<script language="JavaScript" src="js/skill.js"></script>
+
+</head>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style type="text/css">
+<!--
+.title   { width:360px;}
+.td_size1 {position:absolute; left:240px;}
+/*.td_size1 {position:absolute; left:360px;}
+TD {white-space: nowrap;}*/
+.readplz {
+	background-color:#f00;
+	color:#fff; padding: 1px 2px;
+}
+.readplzz {
+	color:#f00;
+	font-weight:bold;	
+}
+
+div#ubernavi {
+	background: url(http://calcx.wushuang.ws/images/th.png) repeat-x;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	position:fixed;
+	display:block;
+	top:0;
+	left:0;
+	margin:0;
+	padding:0px;
+	padding-left:5px;
+	padding-right:5px;
+	/*width: 250px;*/
+}
+
+div#ubernavi {
+	color:#fff
+}
+div#ubernavi a {
+	text-decoration: none;
+	color:#fff;
+}
+div#ubernavi a:hover {
+	text-decoration: underline;
+}
+
+span.navititle {
+	color:#fff;
+	font-weight:bold;
+}
+
+-->
+</style>
+<body>
+<div id="ubernavi">
+<span class="navititle">Quick Navigation:</span> [<a href="http://gandi.wushuang.ws/">omghax!?</a>] [<a href="http://calcx.wushuang.ws/">PvM Calc</a>] <a href="http://calcxre.wushuang.ws/">[renewal alphaaaa]</a>
+</div>
+<form name="calcForm">
+
+<table class="maintb"><tr><td width=100% class="top">
+<Font size="2" id="PRT"></Font><Font size="2"></Font>
+
+<div id="topic" align=left>
+<H3>Changelog</H3>
+<div class="content" style="margin-left: 5px;">
+If you have any suggestions, please contact me at <img src="images/wat.gif" align="absmiddle"><BR>
+Added Energy Coat - Please keep in mind that it currently does not check for reduction validity (e.g. Acid Bomb also gets reduced), much like Defending Aura &amp; Auto Guard! (need a full list of skills that ignore EC/DA/AG to fix this)<BR>
+<span class="readplzz">To any Firefox 3.5 user:</span> Firefox's new Javascript engine "Tracemonkey" which was recently implemented appears to have some (calculator relevant!) bugs. If you want to properly use this calculator, you will have to switch to the older Javascript engine. To do so, enter <span class="readplz">about:config</span> in your address bar and set <span class="readplz">javascript.options.jit.content</span> to <span class="readplz">false</span>. Please restart Firefox after that<BR>
+Added all changes up until 2010-06-03 (all correct KVM overupgrade bonuses), PLUS! finally got around to adding many iRO specific gears - one note though: be aware that savefiles with any of those gears equipped will get corrupted (in the sense that you won't have that gear equipped anymore) everytime I merge a new update from the original calcx
+</div></div>
+
+<div id="topic">
+<H3>RO Calculator</H3>
+<table style="width:98%"><tr><td>&nbsp;</td><td>
+<br>
+
+<input type="button" value="Save" onClick="SaveCookie()">
+<select name="A_SaveSlot">
+<option value="num00">Save1
+</select>
+<input type="button" value="Load" onClick="LoadCookie()">
+<span id="DELHTML"></span><BR>
+<table style="border: 0px; border-collapse: collapse; width: auto;"><TR><TD><input type="button" value="Save as URL" onClick="URLOUT()"></TD><TD><input type="text" name="URL_TEXT" value="" size=130></TD></TABLE>
+
+<Table>
+<TR><TD Valign="top">
+
+<table style="border: 1px solid #999; border-collapse: collapse;">
+<TR><TD ColSpan="6" Bgcolor="#DDDDFF" class="subheader"><div style='float: left; padding: 3px;'><span id="nm01"></span></div><div style='float: right; padding-right: 3px;'><input type="checkbox" name="A_youshi" onClick="calc()"><span id="nm078"></span> / <input type="checkbox" name="BLVauto" checked=1><span id="nm02"></span></div><div style='clear: both;'></div></TD></TR>
+<TR>
+<TD id="nm03"></TD><TD><select name="A_BaseLV"onChange="StCalc(1)|StAllCalc()"></SELECT></TD>
+<TD id="nm04"></TD><TD><select name="A_JobLV"onChange="StAllCalc()"></SELECT></TD>
+<TD id="nm05"></TD><TD><select name="A_JOB" onChange = "ClickJob(this[this.selectedIndex].value) | StAllCalc() | StCalc()"></select></TD>
+</TR>
+<TR>
+<TD id="nm06"></TD><TD><select name="A_STR" onChange = "StCalc() | StAllCalc()"></SELECT><span id = "A_STRp"></span></TD>
+<TD id="nm07"></TD><TD><select name="A_AGI" onChange = "StCalc() | StAllCalc()"></SELECT><span id = "A_AGIp"></span></TD>
+<TD id="nm08"></TD><TD><select name="A_VIT" onChange = "StCalc() | StAllCalc()"></SELECT><span id = "A_VITp"></span></TD>
+</TR>
+<TR>
+<TD id="nm010"></TD><TD><select name="A_INT" onChange = "StCalc() | StAllCalc()"></SELECT><span id = "A_INTp"></span></TD>
+<TD id="nm09"></TD><TD><select name="A_DEX" onChange = "StCalc() | StAllCalc()"></SELECT><span id = "A_DEXp"></span></TD>
+<TD id="nm011"></TD><TD><select name="A_LUK" onChange = "StCalc() | StAllCalc()"></SELECT><span id = "A_LUKp"></span></TD>
+</TR>
+</TABLE><br>
+<table style="border: 1px solid #999; border-collapse: collapse;">
+<TR><TD><span id="nm012"></span></TD><TD><span id = "A_STPOINT"></span></TD></TR>
+</TABLE>
+
+
+</TD><TD Valign="top">
+
+<TABLE style="border: 1px solid #999; border-collapse: collapse;">
+<TR><TD Bgcolor="#DDDDFF" colspan=2 class="subheader">
+<div style='float: left; padding: 3px;'><span id="nm013"></span></div>
+<div style='float: right; padding-right: 3px;'>
+<select name="A_Kakutyou" onChange="KakutyouKansuu2() | StAllCalc()">
+<option value=0>-
+<option value=1>Heal Amount
+<option value=2>Increased HP Recovery
+<option value=3>Increased SP Recovery
+<option value=4>Spiritual Cadence
+<option value=5>Weight Limit
+<option value=6>Elemental Resistance
+<option value=7>Race Resistance
+<option value=8>Status Resistance
+<option value=9>Other Resistance
+<option value=10>Cast time/delay
+</select>
+</div><div style='clear: both;'></div>
+</TD></TR>
+<TR><TD>
+<span id = "A_KakutyouSel"></span>
+<span id = "A_KakutyouData"></span>
+</TD></TR>
+</TABLE>
+
+</TD></TR>
+</TABLE>
+<br>
+<TABLE Border=0>
+<TR>
+<TD id="nm014" class="title" style="width: 10%"></TD>
+<TD id="nm015" class="title" style="width: 10%"></TD>
+<TD id="nm016" class="title" style="width: 7%"></TD>
+<TD id="nm017" class="title" style="width: 7%"></TD>
+<TD id="nm018" class="title" style="width: 7%"></TD>
+<TD id="nm019" class="title" style="width: 7%"></TD>
+<TD id="nm020" class="title" style="width: 12%"></TD>
+<TD id="nm021" class="title" style="width: 10%"></TD>
+<TD id="nm022" class="title" style="width: 7%"></TD>
+<TD id="nm023" class="title" style="width: 7%"></TD>
+<TD id="nm024" class="title" style="width: 8%"></TD>
+<TD id="nm025" class="title" style="width: 8%"></TD>
+</TR><TR>
+<TD Align="right" class="data" id="A_MaxHP"></TD>
+<TD Align="right" class="data" id="A_MaxSP"></TD>
+<TD Align="right" class="data" id="A_totalDEF"></TD>
+<TD Align="right" class="data" id="A_MDEF"></TD>
+<TD Align="right" class="data" id="A_HIT"></TD>
+<TD Align="right" class="data" id="A_FLEE"></TD>
+<TD Align="right" class="data" id="A_LUCKY"></TD>
+<TD Align="right" class="data" id="A_CRI"></TD>
+<TD Align="right" class="data" id="A_MATK"></TD>
+<TD Align="right" class="data" id="A_ASPD"></TD>
+<TD Align="right" class="data" id="A_HPR"></TD>
+<TD Align="right" class="data" id="A_SPR"></TD>
+</TR>
+</TABLE>
+<BR>
+
+<table style="border: 1px solid #999; border-collapse: collapse; width: auto;">
+<TR><TD colspan=6 class="subheader">
+<div style='float: left; padding: 3px;'>Weapon Settings</div><div style='clear: left;'></div>
+</td></tr>
+<tr><td>
+<span id="nm026"></span><select name = "A_SpeedPOT" onChange = "StAllCalc()">
+	<option value="0">-</option>
+	<option value="10">Concentration Potion</option>
+	<option value="15">Awakening Potion</option>
+	<option value="20">Berserk Potion</option>
+</select></td>
+<td class="data">&nbsp;</td>
+<td>&nbsp;
+<span id="nm027"></span><select name="A_WeaponType" onChange = "ClickWeaponType(this[this.selectedIndex].value) | StAllCalc()"></select>
+<span id = "A_SobWeaponName"></span>
+<select name="A_Arrow" onChange = "StAllCalc()" style="visibility:hidden">
+	<option value="0">-
+</select>
+</td></tr></table><br>
+
+<table style="border: 1px solid #999; border-collapse: collapse;" onMouseOver="FirstNovis()">
+<TR><TD ColSpan="8" class="subheader"><div style='float: left; padding: 3px;'><span id="nm028"></span></div><div style='clear: left;'></div></TD></TR>
+<TR>
+<TD class="calc"><span id="nm029"></span><select name="A_weapon1"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)"></select></TD>
+<TD class="calc"><span id = "A_seirenchi_name"></span><select name="A_Weapon_ATKplus"style="visibility:hidden"onChange="StAllCalc()">
+	<option value="0">+0
+	<option value="1">+1
+	<option value="2">+2
+	<option value="3">+3
+	<option value="4">+4
+	<option value="5">+5
+	<option value="6">+6
+	<option value="7">+7
+	<option value="8">+8
+	<option value="9">+9
+	<option value="10">+10
+</select></TD>
+<TD class="calc"><span id="nm030"></span><select name="A_Weapon_zokusei"></select></TD>
+<TD class="calc"><select name="A_cardshort" onChange="SetCardShort()|StAllCalc()|ActiveSkillSetPlus()"></select></TD>
+</TR>
+<TR>
+<TD class="calc"><span id="nm031"></span><select name="A_weapon1_card1"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select></TD>
+<TD class="calc"><select name="A_weapon1_card2"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select></TD>
+<TD class="calc"><select name="A_weapon1_card3"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select></TD>
+<TD class="calc"><select name="A_weapon1_card4"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select></TD>
+</TR>
+<TR>
+<TD class="calc"><span id = "spanA_weapon2"></span></TD>
+<TD class="calc"><span id = "spanA_weapon2seiren"></span></TD>
+<TD class="calc"></TD>
+<TD class="calc"><span id = "spanA_weapon2_CardShort"></span></TD>
+</TR>
+<TR>
+<TD class="calc"><span id = "nA_weapon2_c1"></span></TD>
+<TD class="calc"><span id = "nA_weapon2_c2"></span></TD>
+<TD class="calc"><span id = "nA_weapon2_c3"></span></TD>
+<TD class="calc"><span id = "nA_weapon2_c4"></span></TD>
+</TR>
+
+<TR>
+<TD class="calc">
+<select name="A_HEAD_DEF_PLUS"onChange="StAllCalc()">
+	<option value="0">+0
+	<option value="1">+1
+	<option value="2">+2
+	<option value="3">+3
+	<option value="4">+4
+	<option value="5">+5
+	<option value="6">+6
+	<option value="7">+7
+	<option value="8">+8
+	<option value="9">+9
+	<option value="10">+10
+</select>
+<select name="A_head1"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD>
+<TD class="calc"><select name="A_head1_card"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select></TD>
+<TD class="calc">
+<select name="A_head2"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD>
+<TD class="calc">
+<select name="A_head2_card"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select>
+</TD>
+</TR><TR>
+<TD class="calc" id="ID_B4">
+<select name="A_LEFT_DEF_PLUS"onChange="StAllCalc()">
+	<option value="0">+0
+	<option value="1">+1
+	<option value="2">+2
+	<option value="3">+3
+	<option value="4">+4
+	<option value="5">+5
+	<option value="6">+6
+	<option value="7">+7
+	<option value="8">+8
+	<option value="9">+9
+	<option value="10">+10
+</select>
+<select name="A_left"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD><TD class="calc" id="ID_C4"><select name="A_left_card"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select>
+</TD>
+<TD class="calc">
+<select name="A_head3"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD>
+<TD class="calc">
+<select name="A_HSE_HEAD1"onChange="StAllCalc()"></select>
+</TD>
+</TR><TR>
+<TD class="calc">
+<select name="A_BODY_DEF_PLUS"onChange="StAllCalc()">
+	<option value="0">+0
+	<option value="1">+1
+	<option value="2">+2
+	<option value="3">+3
+	<option value="4">+4
+	<option value="5">+5
+	<option value="6">+6
+	<option value="7">+7
+	<option value="8">+8
+	<option value="9">+9
+	<option value="10">+10
+</select>
+<select name="A_body"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD><TD class="calc"><select name="A_body_card"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select>
+</TD>
+<TD class="calc"></TD>
+<TD class="calc">
+<select name="A_HSE"onChange="StAllCalc()"></select>
+</TD>
+</TR><TR>
+<TD class="calc">
+<select name="A_SHOULDER_DEF_PLUS"onChange="StAllCalc()">
+	<option value="0">+0
+	<option value="1">+1
+	<option value="2">+2
+	<option value="3">+3
+	<option value="4">+4
+	<option value="5">+5
+	<option value="6">+6
+	<option value="7">+7
+	<option value="8">+8
+	<option value="9">+9
+	<option value="10">+10
+</select>
+<select name="A_shoulder"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD><TD class="calc"><select name="A_shoulder_card"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select>
+</TD>
+<TD class="calc"><select name="A_acces1"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD><TD class="calc"><select name="A_acces1_card"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select></TD>
+</TR><TR>
+<TD class="calc">
+<select name="A_SHOES_DEF_PLUS"onChange="StAllCalc()">
+	<option value="0">+0
+	<option value="1">+1
+	<option value="2">+2
+	<option value="3">+3
+	<option value="4">+4
+	<option value="5">+5
+	<option value="6">+6
+	<option value="7">+7
+	<option value="8">+8
+	<option value="9">+9
+	<option value="10">+10
+</select>
+<select name="A_shoes"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD><TD class="calc"><select name="A_shoes_card"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select></TD>
+<TD class="calc"><select name="A_acces2"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)">
+</select>
+</TD><TD class="calc"><select name="A_acces2_card"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)">
+</select></TD>
+</TR>
+</TABLE>
+<br>
+
+<table style="border: 1px solid #999; border-collapse: collapse; width: 60%;">
+<TR><TD ColSpan="10" class="subheader">
+<div style='float: left; padding: 3px;'><span id="nm080"></span></div>
+<div style='float: right; padding-right: 3px;'><input type="checkbox" name="ITEM_SW" onClick="ClickB_Item('SW')"><span id="nm081"></span></div>
+</TD></TR>
+<TR>
+<TD Width="13%"Bgcolor="#DDDDFF"id="ITEM0" class="calc"></TD>
+<TD Width="7%"id="ITEM_DATA" class="calc"></TD>
+<TD Width="13%" Bgcolor="#DDDDFF"id="ITEM1" class="calc"></TD>
+<TD Width="7%"id="ITEM_SLOT" class="calc"></TD>
+<TD Width="13%" Bgcolor="#DDDDFF"id="ITEM2" class="calc"></TD>
+<TD Width="7%"id="ITEM_W_LV" class="calc"></TD>
+<TD Width="13%" Bgcolor="#DDDDFF"id="ITEM3" class="calc"></TD>
+<TD Width="7%"id="ITEM_LV" class="calc"></TD>
+<TD Width="13%" Bgcolor="#DDDDFF"id="ITEM4" class="calc"></TD>
+<TD Width="7%"id="ITEM_WAIT" class="calc"></TD>
+</TR>
+<TR>
+<Td ColSpan="10"id="B_SETUMEI" class="calc">
+</Td>
+</TR>
+</TABLE>
+<br>
+<table><tr><td style="width: 50%;" valign=top>
+
+<table style="border: 1px solid #999; border-collapse: collapse;">
+<TR><TD ColSpan="4" class="subheader"><div style='float: left; padding: 3px;'><span id="nm033"></span></div><div style='clear: left;'></div></TD></TR>
+<TR>
+<TD id="P_Skill0"></TD><TD id="P_Skill0s"></TD>
+<TD id="P_Skill1"></TD><TD id="P_Skill1s"></TD>
+</TR><TR>
+<TD id="P_Skill2"></TD><TD id="P_Skill2s"></TD>
+<TD id="P_Skill3"></TD><TD id="P_Skill3s"></TD>
+</TR><TR>
+<TD id="P_Skill4"></TD><TD id="P_Skill4s"></TD>
+<TD id="P_Skill5"></TD><TD id="P_Skill5s"></TD>
+</TR><TR>
+<TD id="P_Skill6"></TD><TD id="P_Skill6s"></TD>
+<TD id="P_Skill7"></TD><TD id="P_Skill7s"></TD>
+</TR><TR>
+<TD id="P_Skill8"></TD><TD id="P_Skill8s"></TD>
+<TD id="P_Skill9"></TD><TD id="P_Skill9s"></TD>
+</TR><TR>
+<TD id="P_Skill10"></TD><TD id="P_Skill10s"></TD>
+<TD id="P_Skill11"></TD><TD id="P_Skill11s"></TD>
+</TR><TR>
+<TD id="P_Skill12"></TD><TD id="P_Skill12s"></TD>
+<TD id="P_Skill13"></TD><TD id="P_Skill13s"></TD>
+</TR><TR>
+<TD id="P_Skill14"></TD><TD id="P_Skill14s"></TD>
+<TD id="P_Skill15"></TD><TD id="P_Skill15s"></TD>
+</TR>
+</TABLE>
+</td><td style="width: 50%;" valign=top>
+
+<SPAN id="SIENSKILL">
+<table style="border: 1px solid #999; border-collapse: collapse;">
+<TR><TD ColSpan="4" class="subheader"><div style='float: left; padding: 3px;'><span id="nm034"></span></div>
+<div style='float: right; padding-right: 3px;'><input type="checkbox" name="A2_SKILLSW"onClick="Click_SkillSW()"><span id="nm035"></span></span></div>
+<div style='clear: both;'></div>
+</TD></TR>
+</TABLE>
+</span>
+
+</td></tr></table>
+
+</td></tr></table></div>
+
+<div id="topic">
+<H3>Monster Combat Simulation</H3>
+<table style="width:98%"><tr><td>&nbsp;</td><td>
+
+<br>
+<span id="nm036"></span><select name="A_ActiveSkill"onChange = "ClickActiveSkill()"></select>
+<select name="A_ActiveSkillLV"style="visibility:hidden">
+	<option value="1">1
+</select>
+&nbsp;&nbsp;<span id="AASkillName"></span><span id="AASkill"></span><BR>
+
+<input type="button" value="Calculate" onClick="calc()">
+<BR>
+<BR>
+<TABLE Align="left" style="width: auto;">
+<TR><TD>
+<table style="border: 1px solid #999; border-collapse: collapse; width: 300px;">
+<TR><TD ColSpan="4" Bgcolor="#DDDDFF"  class="subheader">
+<div style='float: left; padding: 3px;'><span id="nm037"></span><select name="B_Enemy"onChange = "tPlusEnemyClick()|calc()"></select></div><div style='float: right; padding-right: 3px;'><input type="checkbox" name="B_Ses"onClick="calc()" checked=1><span id="nm063"></span></div><div style='clear: both;'></div>
+</TD></TR>
+<TR>
+<TD><span id="nm038"></span></TD><TD><span id="B_HP"></span></TD>
+<TD><span id="nm039"></span></TD><TD><select name="B_LV"></select></TD>
+</TR>
+<TR>
+<TD><span id="nm040"></span></TD><TD><select name="B_DEF"></select></TD>
+<TD><span id="nm041"></span></TD><TD><select name="B_VIT"></select></TD>
+</TR>
+<TR>
+<TD><span id="nm042"></span></TD><TD><select name="B_MDEF"></select></TD>
+<TD><span id="nm043"></span></TD><TD><select name="B_INT"></select></TD>
+</TR>
+<TR>
+<TD><span id="nm044"></span></TD><TD><select name="B_AGI"></select></TD>
+<TD><span id="nm045"></span></TD><TD><select name="B_LUK"></select></TD>
+</TR>
+<TR>
+<TD><span id="nm046"></span></TD><TD><span id="nm032"></span></TD>
+<TD><span id="nm047"></span></TD><TD><select name="B_ZOKUSEI"></select></TD>
+</TR>
+<TR>
+<TD><span id="nm048"></span></TD><TD><span id="nm049"></span></TD><TD></TD><TD></TD>
+</TR>
+</TABLE>
+
+<!-- NEWWW -->
+<table style="border: 1px solid #999; border-collapse: collapse; width: 300px;">
+<TR><TD ColSpan="2" Bgcolor="#DDDDFF"  class="subheader">Enemy Extras</TD></TR>
+<TR><TD>Flee+</TD>
+<TD><input type="text" onChange="calc()" name="B_TAISEI7" value="0" size=3></TD></TR>
+<TR><TD>Perfect Dodge+</TD>
+<TD><input type="text" onChange="calc()" name="B_TAISEI6" value="0" size=3></TD></TR>
+<TR><TD>Demi-Human Resistance</TD>
+<TD><input type="text" onChange="calc()" name="B_TAISEI0" value="0" size=3>%</TD></TR>
+<TR><TD>Long-range Resistance</TD>
+<TD><input type="text" onChange="calc()" name="B_TAISEI1" value="0" size=3>%</TD></TR>
+<TR><TD>Elemental Resistance</TD>
+<TD>
+<select name="B_TAISEI2_1"onChange="calc()"></select>
+<input type="text" onChange="calc()" name="B_TAISEI2_2" value="0" size=3>%</TD></TR>
+<TR><TD>Elemental Resistance</TD>
+<TD>
+<select name="B_TAISEI3_1"onChange="calc()"></select>
+<input type="text" onChange="calc()" name="B_TAISEI3_2" value="0" size=3>%</TD></TR>
+<TR><TD>Angelus</TD>
+<TD><select name="B_TAISEI4"onChange="calc()"></select></TD></TR>
+<TR><TD>Defending Aura</TD>
+<TD><select name="B_TAISEI5"onChange="calc()"></select></TD></TR>
+<TR><TD>Auto Guard</TD>
+<TD><select name="B_TAISEI10"onChange="calc()"></select></TD></TR>
+<TR><TD>Max HP +</TD>
+<TD><input type="text" onChange="calc()" name="B_TAISEI11" value="0" size=4></TD></TR>
+<TR><TD>Max HP% +</TD>
+<TD><input type="text" onChange="calc()" name="B_TAISEI12" value="0" size=3></TD></TR>
+<TR><TD>Energy Coat</TD>
+<TD><select name="B_TAISEI13"onChange="calc()"></select></TD></TR>
+<TR><TD>Shield Reflect</TD>
+<TD><select name="B_TAISEI14"onChange="calc()"></select></TD></TR>
+<TR><TD>Additional Reflect (Equip/Card)</TD>
+<TD><input type="text" onChange="calc()" name="B_TAISEI15" value="0" size=3>%</TD></TR>
+</TABLE>
+
+<!-- /NEWWW -->
+
+</TD></TR>
+<TR><TD>
+
+<SPAN id="MONSTER_IJYOU">
+<table style="border: 1px solid #999; border-collapse: collapse; width: auto;">
+<TR><TD ColSpan="2" Bgcolor="#DDDDFF"  class="subheader"><div style='float: left; padding: 3px;'><input type="checkbox" name="B_IJYOUSW"onClick="Click_IjyouSW()"><span id="nm051"></span></div>
+<div style='float: right; padding: 3px;'><span id="nm050"></span></div>
+<div style='clear: both;'></div>
+</TD></TR>
+</TABLE>
+</TD></TR>
+</TABLE>
+</span>
+
+<table align="left" style="border: 1px solid #999; border-collapse: collapse; width: auto;">
+<TR><TD ColSpan="2" Bgcolor="#DDDDFF"  class="subheader"><span id="nm052"></span></TD></TR>
+<TR>
+<TD><span id="nm053"></span></TD><TD><span id = "BattleHIT">-</span><span id="nm067"></span></TD>
+</TR><TR>
+<TD><span id = "CRIATKname"></span></TD><TD><span id = "CRIATK"></span></TD>
+</TR><TR>
+<TD><span id = "CRInumname"></span></TD><TD><span id = "CRInum"></span></TD>
+</TR><TR>
+<TD><span id = "bSUBname"></span></TD><TD><span id = "bSUB"></span></TD>
+</TR><TR>
+<TD><span id = "bSUB2name"></span></TD><TD><span id = "bSUB2"></span></TD>
+</TR><TR>
+<TD><span id="nm055"></span></TD><TD><span id = "strID_0">-</span></TD>
+</TR><TR>
+<TD><span id="nm056"></span></TD><TD><span id = "strID_1">-</span></TD>
+</TR><TR>
+<TD><span id="nm057"></span></TD><TD><span id = "strID_2">-</span></TD>
+</TR><TR>
+<TD><span id="nm058"></span></TD><TD><span id = "AveSecondATK">-</span></TD>
+</TR><TR>
+<TD><span id="nm059"></span></TD><TD><span id = "MinATKnum">-</span></TD>
+</TR><TR>
+<TD><span id="nm060"></span></TD><TD><span id = "AveATKnum">-</span></TD>
+</TR><TR>
+<TD><span id="nm061"></span></TD><TD><span id = "MaxATKnum">-</span></TD>
+</TR><TR>
+<TD><span id="nm062"></span></TD><TD><span id = "BattleTime">-</span></TD>
+</TR>
+</TABLE>
+
+<SPAN id="MONSTER_KYOUKA">
+<table align="left" style="border: 1px solid #999; border-collapse: collapse; width: auto;">
+<TR><TD ColSpan="2" Bgcolor="#DDDDFF" class="subheader"><div style="float: left; padding: 3px;"><input type="checkbox" name="B_KYOUKASW"onClick="Click_EnemyKyoukaSW()"><span id="nm084"></span></div>
+<div style="float: right; padding: 3px;"><span id="nm083"></span></div><div style="clear: both;"></div></TD></TR>
+</TABLE>
+</span>
+
+<div style='clear: both;'></div>
+
+<hr>
+<span id="nm082"></span>
+
+<div style='float: left;'>
+<SPAN id="SP_SIEN04">
+<input type="checkbox" name="A6_SKILLSW"onClick="Click_Skill6SW()">
+</SPAN>
+</div>
+
+<div style='float: left;'>
+<SPAN id="SP_SIEN02">
+<input type="checkbox" name="A4_SKILLSW"onClick="Click_Skill4SW()">
+</SPAN>
+</div>
+
+<div style='float: left;'>
+<SPAN id="SP_SIEN03">
+<input type="checkbox" name="A5_SKILLSW"onClick="Click_Skill5SW()">
+</SPAN>
+</div>
+
+<div style='clear: both;'></div>
+
+<div style='float: left;'>
+<SPAN id="SP_SIEN01">
+<input type="checkbox" name="A3_SKILLSW"onClick="Click_Skill3SW()">
+</SPAN>
+</div>
+
+<div style='float: left;'>
+<SPAN id="SP_SIEN05">
+<input type="checkbox" name="A7_SKILLSW"onClick="Click_Skill7SW()">
+</SPAN>
+</div>
+
+<div style='clear: both;'></div>
+
+<hr>
+
+<Font size="2"><B>NOTHING below this line will be saved!</B></Font><BR>
+
+<SPAN id="ID_ETC">
+<input type="checkbox" name="A8_SKILLSW"onClick="Click_Skill8SW()">
+</SPAN>
+
+<hr>
+<Font size="2"><span id="nm077"></span></Font>&nbsp;&nbsp;
+<select name="Conf01">
+<option value="10">0.1s (10 per second)</option>
+<option value="15">0.15s</option>
+<option value="20">0.2s (5 per second)</option>
+<option value="25">0.25s (4 per second)</option>
+<option value="30">0.3s</option>
+<option value="33">0.33s (3 per second)</option>
+<option value="40">0.4s</option>
+<option value="50">0.5s (2 per second)</option>
+</select>
+<input type="button" value="Set" onClick="SaveCookieConf()"> <span id="set"></span><BR>
+
+<Font size=1 color="#AAAAFF">(1.4ver)</Font>
+<span id="PR1"></span>
+
+</td></tr></table>
+</div>
+</form><br>
+<div id="topic" align=right><div class="content" style="margin-right: 5px;">
+Ragnarok Online (c) Gravity Corp. & Lee Myoungjin(studio DTDS). All Rights Reserved.<br>
+Original simulator created by <a href=http://roratorio.2-d.jp/ro/>ROratorio</A>, translated and adapted by Doddler.<br>
+Latest updates/translations by Gandi.
+</div></div>
+
+</td></tr></table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9337006-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body><script language="JavaScript" src="js/monster1.js"></script>
+<script language="JavaScript" src="js/card.js"></script>
+<script language="JavaScript" src="js/foot.js"></script></html>

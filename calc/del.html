@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<title>ROratorio's CalcX Save Deleter (English Version)</title>
+<script language="JavaScript"><!--
+JobName =
+["Novice","Swordsman","Thief","Acolyte","Archer","Magician","Merchant","Knight","Assassin","Priest","Hunter","Wizard","Blacksmith","Crusader","Rogue","Monk","Bard","Dancer","Sage","Alchemist",
+"Super Novice","Lord Knight","Assassin Cross","High Priest","Sniper","High Wizard","Whitesmith","Paladin","Stalker","Champion","Clown","Gypsy","Scholar","Creator",
+"High Novice","High Swordsman","High Thief","High Acolyte","High Archer","High Magician","High Merchant","Taekwon Kid","Taekwon Master","Soul Linker","Ninja","Gunslinger"];
+function DelData2()
+{
+		theName = document.delFORM.A_SaveSlot.value;
+		document.cookie = theName + "=;expires=Thu,01-Jan-70 00:00:01 GMT";
+		LoadCookie3();
+		document.delFORM.A_SaveSlot.value = theName;
+}
+// クッキーロード職をセーブセレクトに
+function LoadCookie3(){
+
+	SaveData = new Array();
+	for(k=1;k<=19;k++){
+		cookieNum = "num0"+ (k-1);
+		if(k == 9)
+			cookieNum = "num0"+ k;
+		if(k >= 10)
+			cookieNum = "num"+ k;
+		SaveData = document.cookie.split("; ");
+		wStr = "";
+
+		for(i=0;SaveData[i];i++){
+			if(SaveData[i].substr(0,6) == cookieNum +"="){
+				wStr = SaveData[i].substr(6,SaveData[i].length);
+				break;
+			}
+		}
+
+		if(wStr.substr(27,1) >= 1){
+			SaveData[0] = wStr.substr(0,2);
+			SaveData[0] = eval(SaveData[0]);
+		}else{
+			SaveData[0] = 998;
+		}
+		SaveData[63] = wStr.substr(132,1);
+
+		if(1<= SaveData[0] && SaveData[0] <=45){
+			if(SaveData[63]==0)
+				document.delFORM.A_SaveSlot.options[k-1] = new Option("Save"+k +": "+JobName[SaveData[0]],cookieNum);
+			else
+				document.delFORM.A_SaveSlot.options[k-1] = new Option("Save"+k +": Baby "+JobName[SaveData[0]],cookieNum);
+		}
+		else if(SaveData[0] == 999 || SaveData[0] == 0){// 999は旧仕様
+			document.delFORM.A_SaveSlot.options[k-1] = new Option("Save"+k +": Novice",cookieNum);
+		}
+		else
+			document.delFORM.A_SaveSlot.options[k-1] = new Option("Save"+k +": No Data",cookieNum);
+	}
+}
+// --></script>
+</HEAD>
+<BODY>
+<Font size=2>
+<BR>Your personal character saves.<BR>
+If you have the calculator page opened already, it's recommended to close it before you delete a save.</Font>
+<form name="delFORM">
+<select name="A_SaveSlot">
+<option value="num00">Save1
+<option value="num01">Save2
+<option value="num02">Save3
+<option value="num03">Save4
+<option value="num04">Save5
+<option value="num05">Save6
+<option value="num06">Save7
+<option value="num07">Save8
+<option value="num09">Save9
+<option value="num10">Save10
+<option value="num11">Save11
+<option value="num12">Save12
+<option value="num13">Save13
+<option value="num14">Save14
+<option value="num15">Save15
+<option value="num16">Save16
+<option value="num17">Save17
+<option value="num18">Save18
+<option value="num19">Save19
+</select>
+
+<input type="button" value="Delete" onClick="DelData2()"><br>
+<br>
+</form>
+</BODY>
+<script language="JavaScript"><!--
+LoadCookie3();
+// --></script>
+</HTML>

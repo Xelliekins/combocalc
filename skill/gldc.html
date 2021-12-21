@@ -1,0 +1,713 @@
+<!--- Rebuilt by Xellie to match originsRO ---> 
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link id="csslink" rel="stylesheet" href="skill.css" type="text/css">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+<title>Scholar</title>
+<style>
+body{
+	font-size:9pt;
+	background-image:url(img/back_gld.png);
+	background-repeat:no-repeat;
+	background-color: #19132f;
+}
+
+table.GeneratedTable {
+  width: 100%;
+background-color:rgba(0, 0, 0, 0.5);
+  border-collapse: collapse;
+  color: #ccc;
+  border-radius: 10px;
+
+}
+
+table.GeneratedTable td, table.GeneratedTable th {
+
+  padding: 5px;
+  border-width: 0.5px;
+  border-color: #a1a1a1;
+  border-style: solid;
+
+}
+
+table.GeneratedTable thead {
+background-color:rgba(200, 200, 200, 0.5);
+  color: #111;
+
+}
+
+th:first-of-type {
+
+  border-top-left-radius: 10px;     
+
+}
+th:last-of-type {
+  border-top-right-radius: 10px;
+}
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 10px;
+}
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 10px;
+}
+
+
+
+</style>
+<script language="JavaScript" src="menu.js"></script>
+<script language="JavaScript" src="skill4.js"></script>
+<script language="JavaScript" src="skill2.js"></script>
+<script language="JavaScript" src="skilllist.js"></script>
+<script language="JavaScript">
+
+var GAPP_P = KPRC_P = EMDV_P = GRSC_P
+	= BLDG_P = EXTG_P = BTOD_P = RGNR_P
+	= RSTR_P = EMGN_P = GLDS_P = WOGL_P
+	= SLOC_P = SHKE_P
+	= 0;
+
+var GAPP_M = 1;
+var KPRC_M = 1;
+var EMDV_M = 1;
+var GRSC_M = 1;
+var BLDG_M = 3;
+var EXTG_M = 10;
+var BTOD_M = 1;
+var RGNR_M = 3;
+var RSTR_M = 1;
+var EMGN_M = 1;
+var GLDS_M = 5;
+var WOGL_M = 5;
+var SLOC_M = 5;
+var SHKE_M = 5;
+
+var GDLV_P = 1;
+var ver = "10";
+
+// 各スキルのフラグ
+
+function GAPP_F(){
+	Point(GAPP_P,1,"GAPP");
+	if(GAPP_P<1){
+		Disable("KPRC"); if(KPRC_P>0){ KPRC_P=0; KPRC_F();}
+		Disable("GRSC"); if(GRSC_P>0){ GRSC_P=0; GRSC_F();}
+		Disable("BTOD"); if(BTOD_P>0){ BTOD_P=0; BTOD_F();}
+	}if(GAPP_P>=1){
+		Visible("KPRC"); Visible("GRSC");
+	}if(GAPP_P>=1 && EXTG_P>=2){
+		Visible("BTOD");
+	}
+}
+function KPRC_F(){
+	Point(KPRC_P,1,"KPRC");
+	if(GAPP_P<1 && KPRC_P>0){
+		GAPP_P=1; Visible("KPRC"); GAPP_F();
+	}
+}
+function EMDV_F(){	Point(EMDV_P,1,"EMDV");}
+function GRSC_F(){
+	Point(GRSC_P,1,"GRSC");
+	if(GRSC_P<1){
+		Disable("EMGN"); if(EMGN_P>0){ EMGN_P=0; EMGN_F();}
+	}if(GRSC_P>=1 && RGNR_P>=1){
+		Visible("EMGN");
+	}if(GAPP_P<1 && GRSC_P>0){
+		GAPP_P=1; Visible("GRSC"); GAPP_F();
+	}
+}
+function BLDG_F(){	Point(BLDG_P,3,"BLDG");}
+function EXTG_F(){
+	Point(EXTG_P,10,"EXTG");
+	if(EXTG_P<2){
+		Disable("BTOD"); if(BTOD_P>0){ BTOD_P=0; BTOD_F();}
+	}if(EXTG_P>=2 && GAPP_P>=1){
+		Visible("BTOD");
+	}if(EXTG_P<5){
+		Disable("RGNR"); if(RGNR_P>0){ RGNR_P=0; RGNR_F();}
+	}if(EXTG_P>=5 && BTOD_P>=1){
+		Visible("RGNR");
+	}
+}
+function BTOD_F(){
+	Point(BTOD_P,1,"BTOD");
+	if(BTOD_P<1){
+		Disable("RGNR"); if(RGNR_P>0){ RGNR_P=0; RGNR_F();}
+	}if(BTOD_P>=1 && EXTG_P>=5){
+		Visible("RGNR");
+	}if(EXTG_P<2 && BTOD_P>0){
+		EXTG_P=2; Visible("EXTG"); EXTG_F();
+	}if(GAPP_P<1 && BTOD_P>0){
+		GAPP_P=1; Visible("BTOD"); GAPP_F();
+	}
+}
+function RGNR_F(){
+	Point(RGNR_P,3,"RGNR");
+	if(RGNR_P<1){
+		Disable("EMGN"); if(EMGN_P>0){ EMGN_P=0; EMGN_F();}
+		Disable("RSTR"); if(RSTR_P>0){ RSTR_P=0; RSTR_F();}
+	}if(RGNR_P>=1 && GRSC_P>=1){
+		Visible("EMGN");
+	}if(RGNR_P>=1){
+		Visible("RSTR");
+	}if(EXTG_P<5 && RGNR_P>0){
+		EXTG_P=5; Visible("RGNR"); EXTG_F();
+	}if(BTOD_P<1 && RGNR_P>0){
+		BTOD_P=1; Visible("RGNR"); BTOD_F();
+	}
+}
+function RSTR_F(){
+	Point(RSTR_P,1,"RSTR");
+	if(RGNR_P<1 && RSTR_P>0){
+		RGNR_P=1; Visible("RSTR"); RGNR_F();
+	}
+}
+function EMGN_F(){
+	Point(EMGN_P,1,"EMGN");
+	if(GRSC_P<1 && EMGN_P>0){
+		GRSC_P=1; Visible("EMGN"); GRSC_F();
+	}if(RGNR_P<1 && EMGN_P>0){
+		RGNR_P=1; Visible("EMGN"); RGNR_F();
+	}
+}
+function GLDS_F(){
+	Point(GLDS_P,5,"GLDS");
+	if(GLDS_P<1){
+		Disable("SHKE"); if(SHKE_P>0){ SHKE_P=0; SHKE_F();}
+	}if(GLDS_P>=1){
+		Visible("SHKE");
+	}
+}
+function WOGL_F(){
+	Point(WOGL_P,5,"WOGL");
+	if(WOGL_P<1){
+		Disable("SLOC"); if(SLOC_P>0){ SLOC_P=0; SLOC_F();}
+	}if(WOGL_P>=1){
+		Visible("SLOC");
+	}
+}
+function SLOC_F(){
+	Point(SLOC_P,5,"SLOC");
+	if(WOGL_P<1 && SLOC_P>0){
+		WOGL_P=1; Visible("SLOC"); WOGL_F();
+	}
+}
+function SHKE_F(){
+	Point(SHKE_P,5,"SHKE");
+	if(GLDS_P<1 && SHKE_P>0){
+		GLDS_P=1; Visible("SHKE"); GLDS_F();
+	}
+}
+
+// イベント
+function setPoint(parts,point){
+	if(parts == "GAPP") { if(point>=0 && point<=1 ) GAPP_P=point; GAPP_F(); }
+	if(parts == "KPRC") { if(point>=0 && point<=1 ) KPRC_P=point; KPRC_F(); }
+	if(parts == "EMDV") { if(point>=0 && point<=1 ) EMDV_P=point; EMDV_F(); }
+	if(parts == "GRSC") { if(point>=0 && point<=1 ) GRSC_P=point; GRSC_F(); }
+	if(parts == "BLDG") { if(point>=0 && point<=3 ) BLDG_P=point; BLDG_F(); }
+	if(parts == "EXTG") { if(point>=0 && point<=10) EXTG_P=point; EXTG_F(); }
+	if(parts == "BTOD") { if(point>=0 && point<=1 ) BTOD_P=point; BTOD_F(); }
+	if(parts == "RGNR") { if(point>=0 && point<=3 ) RGNR_P=point; RGNR_F(); }
+	if(parts == "RSTR") { if(point>=0 && point<=1 ) RSTR_P=point; RSTR_F(); }
+	if(parts == "EMGN") { if(point>=0 && point<=1 ) EMGN_P=point; EMGN_F(); }
+	if(parts == "GLDS") { if(point>=0 && point<=5 ) GLDS_P=point; GLDS_F(); }
+	if(parts == "WOGL") { if(point>=0 && point<=5 ) WOGL_P=point; WOGL_F(); }
+	if(parts == "SLOC") { if(point>=0 && point<=5 ) SLOC_P=point; SLOC_F(); }
+	if(parts == "SHKE") { if(point>=0 && point<=5 ) SHKE_P=point; SHKE_F(); }
+
+	ShowPoint();
+}
+
+
+function ShowPoint(){
+	GDLV_P = GAPP_P + KPRC_P + EMDV_P + GRSC_P
+		+ BLDG_P + EXTG_P + BTOD_P + RGNR_P
+		+ RSTR_P + EMGN_P + GLDS_P + WOGL_P
+		+ SLOC_P + SHKE_P + 1;
+	showMsgG();
+}
+
+function showMsgG(){
+	var nextExp
+		= new Array(0,2,4,8,14,22,32,44,
+			58,74,92,112,134,158,184,212,
+			242,274,308,344,382,422,464,
+			508,554,602,652,704,758,814,
+			872,932,994,1058,1124,1192,
+			1262,1334,1408,1484,1562,1642,
+			1724,1808,1894,2000,2000,2000,
+			2000,2000);
+	var totalExp
+		= new Array(0,2,6,14,28,50,82,
+			126,184,258,350,462,596,754,
+			938,1150,1392,1666,1974,2318,
+			2700,3122,3586,4094,4648,5250,
+			5902,6606,7364,8178,9050,9982,
+			10976,12034,13158,14350,15612,
+			16946,18354,19838,21400,23042,
+			24766,26574,28468,30468,32468,
+			34468,36468,38468);
+
+	if(GDLV_P <= 50){
+		document.getElementById("msgid").style.backgroundColor = "#ffffff";
+		document.getElementById("msgid").innerHTML = " Guild Lv : " + GDLV_P
+			+ "　/ Exp Total : " + totalExp[GDLV_P-1]
+			+ "M　Next: " + nextExp[GDLV_P] + "M";
+	}if(GDLV_P > 50){
+		document.getElementById("msgid").style.backgroundColor = "#ffdddd";
+		document.getElementById("msgid").innerHTML = " error ";
+	}
+}
+
+//コントロール関連
+function Clear(){
+	GAPP_P = KPRC_P = EMDV_P = GRSC_P
+	= BLDG_P = EXTG_P = BTOD_P = RGNR_P
+	= RSTR_P = EMGN_P = GLDS_P = WOGL_P
+	= SLOC_P = SHKE_P
+	= 0;
+	GDLV_P = 1;
+	GAPP_F(); KPRC_F(); EMDV_F(); GRSC_F();
+	BLDG_F(); EXTG_F(); BTOD_F(); RGNR_F();
+	RSTR_F(); EMGN_F(); GLDS_F(); WOGL_F();
+	SLOC_F(); SHKE_F();
+	ShowPoint();
+
+	setAlertLayer("All Points have been cleared.",1);
+}
+
+function Save(mode){
+	var tdata = new Array(15);
+	tdata[0]  = GAPP_P;
+	tdata[1]  = KPRC_P;
+	tdata[2]  = EMDV_P;
+	tdata[3]  = GRSC_P;
+	tdata[4]  = BLDG_P;
+	tdata[5]  = EXTG_P;
+	tdata[6]  = BTOD_P;
+	tdata[7]  = RGNR_P;
+	tdata[8]  = RSTR_P;
+	tdata[9]  = EMGN_P;
+	tdata[10] = GLDS_P;
+	tdata[11] = WOGL_P;
+	tdata[12] = SLOC_P;
+	tdata[13] = SHKE_P;
+	tdata[14] = 11;
+
+	code = encode(tdata,ver);
+
+	if(mode == "scode"){
+		return code;
+	}if(mode == "cookie"){
+		Save2(code);
+	}
+}
+
+function Load(mode){
+	code = loadType(mode);
+	if(code){
+		tdata = decode(code,ver);
+
+		GAPP_P = tdata[0];
+		KPRC_P = tdata[1];
+		EMDV_P = tdata[2];
+		GRSC_P = tdata[3];
+		BLDG_P = tdata[4];
+		EXTG_P = tdata[5];
+		BTOD_P = tdata[6];
+		RGNR_P = tdata[7];
+		RSTR_P = tdata[8];
+		EMGN_P = tdata[9];
+		GLDS_P = tdata[10];
+		WOGL_P = tdata[11];
+		SLOC_P = tdata[12];
+		SHKE_P = tdata[13];
+	}
+	GAPP_F(); KPRC_F(); EMDV_F(); GRSC_F();
+	BLDG_F(); EXTG_F(); BTOD_F(); RGNR_F();
+	RSTR_F(); EMGN_F(); GLDS_F(); WOGL_F();
+	SLOC_F(); SHKE_F();
+
+	ShowPoint();
+}
+
+</script>
+
+</head>
+
+
+
+<body onload="Init()" onmousewheel="return false;">
+
+<div id="msgid" style="position: absolute; top: 8px; left: 10px; width: 340px; padding: 3px; background-color: rgb(255, 255, 255);"> 1st : <span style="color:#aa0033;">1</span>/50 　2nd : <span style="color:#aa0033;">25</span>/70　rest : 94</div>
+<div style="position:absolute; top:5px; left:390px; width:900px;">
+<form name="Msg">
+Job Change<nobr>
+
+<select name="jobchg1" onchange="JCHF_P=this.value; showMsg()">
+<option value="50" selected="selected">Job50
+</option><option value="49">Job49
+
+</option><option value="48">Job48
+</option><option value="47">Job47
+</option><option value="46">Job46
+</option><option value="45">Job45
+</option><option value="44">Job44
+</option><option value="43">Job43
+</option><option value="42">Job42
+</option><option value="41">Job41
+</option><option value="40">Job40
+</option></select>
+
+　　
+<input type="hidden" name="scode" size="32" value="" readonly="">
+
+<span class="saveoptions">
+Saved Builds </br>
+<select name="Data" style="width:200px;">
+<option value="1">slot 1 : (pro) </option><option value="2" style="background-color: rgb(204, 204, 204);">slot 2 : (bio) </option><option value="3" style="background-color: rgb(204, 204, 204);">slot 3 : (gyp) </option><option value="4">slot 4 : (pro) </option><option value="5" style="background-color: rgb(204, 204, 204);">slot 5 : (hwz) </option><option value="6">slot 6 : no save</option><option value="7">slot 7 : no save</option><option value="8">slot 8 : no save</option><option value="9">slot 9 : no save</option><option value="10">slot 10 : no save</option><option value="11">slot 11 : no save</option><option value="12">slot 12 : no save</option><option value="13">slot 13 : no save</option><option value="14">slot 14 : no save</option><option value="15">slot 15 : no save</option><option value="16">slot 16 : no save</option><option value="17">slot 17 : no save</option><option value="18">slot 18 : no save</option><option value="19">slot 19 : no save</option><option value="20">slot 20 : no save</option><option value="21">slot 21 : no save</option><option value="22">slot 22 : no save</option><option value="23">slot 23 : no save</option><option value="24">slot 24 : no save</option><option value="25">slot 25 : no save</option><option value="26">slot 26 : no save</option><option value="27">slot 27 : no save</option><option value="28">slot 28 : no save</option><option value="29">slot 29 : no save</option><option value="30">slot 30 : no save</option></select> </br> <p>
+Character Name </br><input type="text" name="chrName" size="20" maxlength="20" title="Name your save slot" style="background-color: #fff; border: 1px solid dimgrey;">　</br> <p>
+<a class="con" href="javascript:Save('cookie');" title="Save to Cookie"> Save Build</a> <a class="con" href="javascript:Load('cookie');" title="Load from Cookie">Load Build</a></br>
+
+<a class="con" href="javascript:Reset();" title="Clear all points">Reset Build</a>
+<a class="con" href="javascript:DeleteSlot();" title="Delete Save Slot">Delete Save Data</a></br>
+<a class="con" href="javascript:codeCopy();" title="Skill Points to URL">Save as URL</a>
+<a class="con" href="JavaScript:setOption2Layer();" title="Show as Text">Show as Text</a> </br>
+
+</form>
+
+
+
+</span>
+
+
+
+
+
+
+</div>
+<div id="navmenu">
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Change Job</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="hpr.html">High Priest</a>    <a href="chp.html">Champion</a> </br>
+    <a href="snp.html" style="width: 55px;">Sniper</a>  <a href="clw.html" style="width: 55px;">Minstrel</a>  <a href="gyp.html" style="width: 55px;">Gypsy</a> </br>
+	    <a href="hwz.html">High Wizard</a>    <a href="pro.html">Scholar</a> </br>
+		    <a href="wsm.html">Mastersmith</a>    <a href="bio.html">Biochemist</a> </br>
+			    <a href="lkt.html">Lord Knight</a>    <a href="pld.html">Paladin</a> </br>
+			    <a href="asc.html">Assassin Cross</a>    <a href="stk.html">Stalker</a> </br>
+  </div>
+  <a class="homebtn" href="https://xellie.com/RO/skill/" title="Home">Homepage</a>　
+</div>
+
+</div>
+
+
+
+<table class="job" id="GAPP" style="position: absolute; top: 50px; left: 30px; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:0px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'GAPP')" onmouseout="msout()">
+Guild Approval
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="KPRC" style="position: absolute; top: 50px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-30px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'KPRC')" onmouseout="msout()">
+Contract with Kafra
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="EMDV" style="position: absolute; top: 50px; left: 630px; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-60px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'EMDV')" onmouseout="msout()">
+<font size="1">Permanent Development</font>
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="GRSC" style="position: absolute; top: 110px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-90px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'GRSC')" onmouseout="msout()">
+Guardian Research
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="BLDG" style="position: absolute; top: 110px; left: 630px; background-position: -280px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-120px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'BLDG')" onmouseout="msout()">
+Strengthen Guardians
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="EXTG" style="position: absolute; top: 110px; left: 30px; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-150px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'EXTG')" onmouseout="msout()">
+Guild Extension
+</span></td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="BTOD" style="position: absolute; top: 110px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-180px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'BTOD')" onmouseout="msout()">
+Battle Command
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="RGNR" style="position: absolute; top: 170px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -280px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-210px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'RGNR')" onmouseout="msout()">
+Regeneration</span></td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="RSTR" style="position: absolute; top: 170px; left: 30px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-240px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'RSTR')" onmouseout="msout()">
+Restoration
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="EMGN" style="position: absolute; top: 170px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-270px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'EMGN')" onmouseout="msout()">
+Urgent Call
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="GLDS" style="position: absolute; top: 230px; left: 30px; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-300px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'GLDS')" onmouseout="msout()">
+Great Leadership
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="WOGL" style="position: absolute; top: 230px; left: 430px; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-330px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'WOGL')" onmouseout="msout()">
+Glorious Wounds</span></td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="SLOC" style="position: absolute; top: 230px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-360px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SLOC')" onmouseout="msout()">
+Cold Heart
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="SHKE" style="position: absolute; top: 230px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_gld.png'); background-position:-390px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SHKE')" onmouseout="msout()">
+Sharp Gaze</span></td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<table class="GeneratedTable" style="position:absolute; top:280px; left:30px; width:0px; height:0px;" cellspacing="0" cellpadding="0">
+<thead>
+    <tr>
+      <th>Guild Lv</th>
+      <th>Exp</th>
+     <th>Guild Lv</th>
+      <th>Exp</th>
+	  <th>Guild Lv</th>
+      <th>Exp</th>
+	  <th>Guild Lv</th>
+      <th>Exp</th>
+    </tr>
+  </thead>
+  <tbody>
+
+	<tr>
+		<td>1</td>
+		<td>-</td>
+		<td>14</td>
+		<td>158,000,000</td>
+		<td>27</td>
+		<td>652,000,000</td>
+		<td>40</td>
+		<td>1,484,000,000</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>2,000,000</td>
+		<td>15</td>
+		<td>184,000,000</td>
+		<td>28</td>
+		<td>704,000,000</td>
+		<td>41</td>
+		<td>1,562,000,000</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>4,000,000</td>
+		<td>16</td>
+		<td>212,000,000</td>
+		<td>29</td>
+		<td>758,000,000</td>
+		<td>42</td>
+		<td>1,642,000,000</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>8,000,000</td>
+		<td>17</td>
+		<td>242,000,000</td>
+		<td>30</td>
+		<td>814,000,000</td>
+		<td>43</td>
+		<td>1,724,000,000</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>14,000,000</td>
+		<td>18</td>
+		<td>274,000,000</td>
+		<td>31</td>
+		<td>872,000,000</td>
+		<td>44</td>
+		<td>1,808,000,000</td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>22,000,000</td>
+		<td>19</td>
+		<td>308,000,000</td>
+		<td>32</td>
+		<td>932,000,000</td>
+		<td>45</td>
+		<td>1,894,000,000</td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>32,000,000</td>
+		<td>20</td>
+		<td>344,000,000</td>
+		<td>33</td>
+		<td>994,000,000</td>
+		<td>46</td>
+		<td>1,999,999,999</td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td>44,000,000</td>
+		<td>21</td>
+		<td>382,000,000</td>
+		<td>34</td>
+		<td>1,058,000,000</td>
+		<td>47</td>
+		<td>1,999,999,999</td>
+	</tr>
+	<tr>
+		<td>9</td>
+		<td>58,000,000</td>
+		<td>22</td>
+		<td>422,000,000</td>
+		<td>35</td>
+		<td>1,124,000,000</td>
+		<td>48</td>
+		<td>1,999,999,999</td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td>74,000,000</td>
+		<td>23</td>
+		<td>464,000,000</td>
+		<td>36</td>
+		<td>1,192,000,000</td>
+		<td>49</td>
+		<td>1,999,999,999</td>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td>92,000,000</td>
+		<td>24</td>
+		<td>508,000,000</td>
+		<td>37</td>
+		<td>1,262,000,000</td>
+		<td>50</td>
+		<td>1,999,999,999</td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>112,000,000</td>
+		<td>25</td>
+		<td>554,000,000</td>
+		<td>38</td>
+		<td>1,334,000,000</td>
+		<td> </td>
+		<td> </td>
+	</tr>
+	<tr>
+		<td>13</td>
+		<td>134,000,000</td>
+		<td>26</td>
+		<td>602,000,000</td>
+		<td>39</td>
+		<td>1,408,000,000</td>
+		<td> </td>
+		<td> </td>
+	</tr>
+</tbody></table>
+
+
+<div id="skill" style="position:absolute; z-index:1;"></div>
+<div id="option1" style="position:absolute; top:0px; left:0px; width:0px; height:0px; background-image:url(img/alpha.png);" onclick="JavaScript:offOptionLayer();"></div>
+<div id="option2" style="position:absolute; top:0px; left:0px; width:0px; height:0px;"></div>
+<div id="dummy" style="position:absolute; top:0px; left:0px; width:1200px; height:800px; z-index:-1;"></div>
+
+
+</body></html>

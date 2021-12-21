@@ -1,0 +1,424 @@
+
+body {
+  font-family: Helvetica, Sans-Serif;
+  font-size: 12px;
+  /*margin: 7px;*/
+  margin:0;
+  padding: 0;
+ background-color:#2c2f33;
+  color: #333;
+  line-height: 185%;
+
+}
+
+table {
+  font-family: Helvetica, Sans-Serif;
+  font-size: 12px;
+
+  color: #fff;
+  width:100%;
+}
+
+table.maintb {
+
+  font-family: Helvetica, Sans-Serif;
+  font-size: 12px;
+    background-color:#2c2f33;
+  color: #999;
+  line-height: 185%;
+max-width: 1000px;
+  padding-top: 5px;
+  margin-left:2%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 12px;
+  text-decoration: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+h3 {
+  margin-top: 0em;
+
+  padding-left: 15px;
+  font-size: 12px;
+
+background-color: #7289da;
+  border-left: 10px solid #000;
+  color: #fff;
+  padding: 0.5em;
+  font-variant: small-caps;
+}
+
+ol { 
+  list-style-type: decimal; 
+}
+
+
+td.top {
+  vertical-align: top;
+}
+
+
+#topic {
+
+background-color: #2c2f33;
+  margin-bottom: 1em;
+  margin-right: 7px;
+
+}
+
+#topic-main {
+/*  background-color: #555; */
+  margin-bottom: 1em;  
+  padding-left: 15px;
+  margin-right: 7px;
+}
+
+
+#topic a {
+  color: #f55;
+  text-decoration: none;
+}
+
+#topic a:hover {
+  border-bottom: 1px solid #555;
+}
+
+#topic td.data {
+text-align: left;
+
+}
+
+#topic td.data1 {
+  border: 1px solid rgb(230,230,230);
+  background: rgb(250,250,250);
+}
+
+#topic td.data2 {
+  border: 1px solid rgb(210,210,210);
+  background: rgb(230,230,230);
+}
+
+#topic td.data3 {
+  border: 1px solid rgb(190,190,190);
+  background: rgb(210,210,210);
+}
+
+#topic td.data4 {
+  border: 1px solid rgb(170,170,170);
+  background: rgb(190,190,190);
+}
+
+#topic td.before { 
+  background: rgb(255,220,220);
+
+}
+
+#topic td.aftern { 
+
+}
+
+#topic td.beforen { 
+
+}
+
+#topic td.after { 
+  background: rgb(220,255,220);
+
+}
+
+#topic td.calc {
+ /* border-right: 1px solid #999; */
+ /* border-bottom: 1px solid #999; */
+/*  background-color: #36393E; */
+  padding-right: 2px;
+  padding-left: 5px;
+}
+
+#topic td.calcnb {
+  border-bottom: 1px solid #999;
+ /* background-color: #555;
+  padding-right: 2px; */
+  padding-left: 5px;
+}
+
+
+#topic td.subheader {
+  margin-top: 0em;
+border-radius: 5px;
+  font-size: 12px;
+
+
+background-color: #7289da;
+  color: #fff;
+}
+
+#topic h2.topicheader {
+  font-weight: bold;
+  border-bottom: 1px dotted #999;
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+  padding-left: 15px;
+  font-size: 12px;
+}
+
+#topic h2.subheader {
+  margin-top: 0em;
+  font-size: 12px;
+background-color: #7289da;
+  color: #000;
+}
+
+#topic h2.mainhead {
+  
+  font-size: 24px;
+}
+
+#topic ul {
+  margin: 0em 0em 0em 1em;
+  padding: 0px;
+  margin-left: 1em;
+}
+
+#topic li {
+  line-height: 135%;
+}
+
+#topic li.sidebar {
+  list-style: none;
+  line-height: 135%;
+}
+
+#topic div.content {
+ padding-bottom: 5px;
+}
+
+#topic {
+
+ /* background-color: #36393E; */
+  margin-bottom: 1em;
+
+}
+
+#topic hr2 {
+  display: block; 
+  clear: left; 
+  margin: -0.66em 0;
+  visibility: hidden;
+}
+
+
+#topic H4 {
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+  padding-left: 25px;
+  font-size: 10px;
+
+  background: #888;
+  color: #fff;
+}
+
+#topic div.post {
+  margin-bottom: 0.5em;  
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#topic p:first-letter { font-size: 120% }
+
+#container {
+  width: 100%;
+  /*min-width: 640px;*/
+}
+
+#topic td.title {
+  font-weight: bold;
+    border-bottom: 2px solid rgb(0,0,0)
+
+}
+
+#topic td.subtitle {
+  font-weight: bold;
+  border-bottom: 1px solid #666;
+  background: rgb(192,192,192);
+}
+
+#topic td data {
+  border: 1px dotted #999;
+  border-bottom: 1px dotted #999;
+}
+
+select{
+    background: rgba(100,100,100,0.5);
+	border-radius: 5px;
+	color: #ddd;
+}
+
+option:not(:checked) {
+  background-color: #555;
+
+}
+
+.statwin {
+  color: red;
+    display:block;
+ /* background-image: url("statwin1.png");
+ background-position: 60px -14px; 
+  	background-repeat: no-repeat; */
+	max-width: 590px;
+	position: relative;
+	
+}
+
+#jobber {
+		background-repeat: no-repeat;
+    background-attachment: fixed;
+	max-width: 100px;
+	min-height: 200px;
+	position: absolute;
+	left: -100px;
+	top: -50px;
+	overflow: visible;
+	
+
+
+}
+
+#A_KakutyouData {
+ background-color:#2c2f3380;
+ display: block;
+}
+
+#j1 {
+	 
+  position:absolute;
+  right:0px;
+  top:0px;
+    padding-top: 30px;
+     margin-top: -30px;
+}
+
+input {
+  background-color: #888;
+  border: 1px solid #888; 
+}
+#hp {
+	background-color: #7F7;
+	border-radius:5px;
+	color:#000;
+	padding: 2px;
+	width: 300px;
+	font-weight: bolder;
+	   height: 15px;;
+}
+#sp {
+	background-color: #77F;
+	border-radius:5px;
+	color:#000;
+	padding: 2px;
+	width: 300px;
+	font-weight: bolder;
+	   height: 15px;;
+}
+
+.topper {
+  display: flex;
+  justify-content: space-between;
+ /* width: 10rem; */
+  padding: 10px;
+  color: eee;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Basic Styles */
+
+
+.button-basic {	
+background-color: #4b5052;	
+border: 2px solid black;	
+color: whitesmoke;	
+padding: 1em 1.5em;	
+text-align: center;	
+text-decoration: none;	
+font-size: 1em;	
+display: inline-block;	
+width: 22%; /* to test the test-align property */
+}
+
+.button-basic-sm {	
+background-color: #4b5052;	
+border: 2px solid black;	
+color: whitesmoke;	
+padding: 0.1em 0.5em;	
+margin-top: 5px;
+margin-left: 50px;
+text-align: center;	
+text-decoration: none;	
+font-size: 1em;	
+display: inline-block;	
+width: 22%; /* to test the test-align property */
+}

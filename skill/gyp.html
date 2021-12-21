@@ -1,0 +1,983 @@
+<!--- Rebuilt by Xellie to match originsRO ---> 
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link id="csslink" rel="stylesheet" href="skill.css" type="text/css">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+<title>Gyspy</title>
+<style>
+body{
+	font-size:9pt;
+	background-image:url(img/back_gyp.png);
+	background-repeat:no-repeat;
+	background-color: #a4d7ec;
+}
+</style>
+<script language="JavaScript" src="menu.js"></script>
+<script language="JavaScript" src="skill4.js"></script>
+<script language="JavaScript" src="skill2.js"></script>
+<script language="JavaScript" src="skilllist.js"></script>
+<script language="JavaScript">
+
+var ALSW_P = CNCT_P = DBLS_P = OWLE_P
+	= VLTE_P
+	= DCLS_P = TRAR_P = UGDC_P = SCRM_P
+	= HMMN_P = PDFM_P = FTKS_P = SVFY_P
+	= AMPB_P = ENCR_P = LLBY_P = MKIM_P
+	= ETCH_P = SDBF_P = NBLG_P = RKWL_P
+	= ABYS_P = SGFR_P
+	= ARVL_P = MWMF_P = MRNT_P = LGFR_P
+	= HRMD_P = TCOF_P
+	= 0;
+
+var use1 = use2 = 0;
+var JCHF_P = 50;
+var ver = "10";
+
+var ALSW_M = 10;
+var CNCT_M = 10;
+var DBLS_M = 10;
+var OWLE_M = 10;
+var VLTE_M = 10;
+
+var DCLS_M = 10;
+var TRAR_M = 5;
+var UGDC_M = 5;
+var SCRM_M = 5;
+var HMMN_M = 10;
+var PDFM_M = 10;
+var FTKS_M = 10;
+var SVFY_M = 10;
+var AMPB_M = 1;
+var ENCR_M = 1;
+var LLBY_M = 1;
+var MKIM_M = 5;
+var ETCH_M = 1;
+var SDBF_M = 5;
+var NBLG_M = 5;
+var RKWL_M = 1;
+var ABYS_M = 1;
+var SGFR_M = 5;
+
+var ARVL_M = 10;
+var MWMF_M = 5;
+var MRNT_M = 1;
+var LGFR_M = 5;
+var HRMD_M = 5;
+var TCOF_M = 5;
+
+// 各スキルのフラグ
+// アーチャー
+function ALSW_F(){
+	Point(ALSW_P,10,"ALSW");
+	if(ALSW_P<5){
+		Disable("ARVL"); if(ARVL_P>0){ ARVL_P=0; ARVL_F();}
+	}if(ALSW_P>=5 && TRAR_P>=1){
+		Visible("ARVL");
+	}if(DBLS_P<5 && ALSW_P>0){
+		DBLS_P=5; Visible("ALSW"); DBLS_F();
+	}
+}
+function CNCT_F(){
+	Point(CNCT_P,10,"CNCT");
+	if(CNCT_P<5){
+		Disable("MWMF"); if(MWMF_P>0){ MWMF_P=0; MWMF_F();}
+	}if(CNCT_P>=5 && DCLS_P>=7){
+		Visible("MWMF");
+	}if(CNCT_P<10){
+		Disable("MRNT"); if(MRNT_P>0){ MRNT_P=0; MRNT_F();}
+		Disable("HRMD"); if(HRMD_P>0){ HRMD_P=0; HRMD_F();}
+		Disable("TCOF"); if(TCOF_P>0){ TCOF_P=0; TCOF_F();}
+	}if(CNCT_P>=10 && DCLS_P>=5){
+		Visible("MRNT");
+	}if(CNCT_P>=10 && DCLS_P>=10){
+		Visible("HRMD");
+	}if(CNCT_P>=10 && UGDC_P>=3){
+		Visible("TCOF");
+	}if(VLTE_P<1 && CNCT_P>0){
+		VLTE_P=1; Visible("CNCT"); VLTE_F();
+	}
+}
+function DBLS_F(){
+	Point(DBLS_P,10,"DBLS");
+	if(DBLS_P<5){
+		Disable("ALSW"); if(ALSW_P>0){ ALSW_P=0; ALSW_F();}
+	}if(DBLS_P>=5){
+		Visible("ALSW");
+	}
+}
+function OWLE_F(){
+	Point(OWLE_P,10,"OWLE");
+	if(OWLE_P<3){
+		Disable("VLTE"); if(VLTE_P>0){ VLTE_P=0; VLTE_F();}
+	}if(OWLE_P>=3){
+		Visible("VLTE");
+	}
+}
+function VLTE_F(){
+	Point(VLTE_P,10,"VLTE");
+	if(VLTE_P<1){
+		Disable("CNCT"); if(CNCT_P>0){ CNCT_P=0; CNCT_F();}
+	}if(VLTE_P>=1){
+		Visible("CNCT");
+	}if(OWLE_P<3 && VLTE_P>0){
+		OWLE_P=3; Visible("VLTE"); OWLE_F();
+	}
+}
+
+// Dancer
+
+function DCLS_F(){
+	Point(DCLS_P,10,"DCLS");
+	if(DCLS_P<1){
+		Disable("UGDC"); if(UGDC_P>0){ UGDC_P=0; UGDC_F();}
+	}if(DCLS_P>=1 && AMPB_P>=1){
+		Visible("UGDC");
+	}if(DCLS_P<3){
+		Disable("TRAR"); if(TRAR_P>0){ TRAR_P=0; TRAR_F();}
+	}if(DCLS_P>=3){
+		Visible("TRAR");
+	}if(DCLS_P<5){
+		Disable("MRNT"); if(MRNT_P>0){ MRNT_P=0; MRNT_F();}
+	}if(DCLS_P>=5 && CNCT_P>=10){
+		Visible("MRNT");
+	}if(DCLS_P<7){
+		Disable("MWMF"); if(MWMF_P>0){ MWMF_P=0; MWMF_F();}
+	}if(DCLS_P>=7 && CNCT_P>=5){
+		Visible("MWMF");
+	}if(DCLS_P<10){
+		Disable("LGFR"); if(LGFR_P>0){ LGFR_P=0; LGFR_F();}
+		Disable("HRMD"); if(HRMD_P>0){ HRMD_P=0; HRMD_F();}
+	}if(DCLS_P>=10 && UGDC_P>=3 && MRNT_P>=1){
+		Visible("LGFR");
+	}if(DCLS_P>=10 && CNCT_P>=10){
+		Visible("HRMD");
+	}
+}
+function TRAR_F(){
+	Point(TRAR_P,5, "TRAR");
+	if(TRAR_P<1){
+		Disable("ARVL"); if(ARVL_P>0){ ARVL_P=0; ARVL_F();}
+	}if(TRAR_P>=1 && ALSW_P>=5){
+		Visible("ARVL");
+	}if(DCLS_P<3 && TRAR_P>0){
+		DCLS_P=3; Visible("TRAR"); DCLS_F();
+	}
+}
+function UGDC_F(){
+	Point(UGDC_P,5, "UGDC");
+	if(UGDC_P<3){
+		Disable("FTKS"); if(FTKS_P>0){ FTKS_P=0; FTKS_F();}
+		Disable("SVFY"); if(SVFY_P>0){ SVFY_P=0; SVFY_F();}
+		Disable("HMMN"); if(HMMN_P>0){ HMMN_P=0; HMMN_F();}
+		Disable("PDFM"); if(PDFM_P>0){ PDFM_P=0; PDFM_F();}
+		Disable("LGFR"); if(LGFR_P>0){ LGFR_P=0; LGFR_F();}
+		Disable("TCOF"); if(TCOF_P>0){ TCOF_P=0; TCOF_F();}
+	}if(UGDC_P>=3){
+		Visible("FTKS"); Visible("SVFY"); Visible("HMMN"); Visible("PDFM");
+	}if(UGDC_P>=3 && DCLS_P>=10 && MRNT_P>=1){
+		Visible("LGFR");
+	}if(UGDC_P>=3 && CNCT_P>=10){
+		Visible("TCOF");
+	}if(DCLS_P<1 && UGDC_P>0){
+		DCLS_P=1; Visible("UGDC"); DCLS_F();
+	}if(AMPB_P<1 && UGDC_P>0){
+		AMPB_P=1; Visible("UGDC"); AMPB_F();
+	}
+}
+function SCRM_F(){
+	Point(SCRM_P,5, "SCRM");
+	if(ENCR_P<1 && SCRM_P>0){
+		ENCR_P=1; Visible("SCRM"); ENCR_F();
+	}
+}
+function HMMN_F(){
+	Point(HMMN_P,10,"HMMN");
+	if(HMMN_P<10){
+		Disable("LLBY"); if(LLBY_P>0){ LLBY_P=0; LLBY_F();}
+	}if(HMMN_P>=10){
+		Visible("LLBY");
+	}if(UGDC_P<3 && HMMN_P>0){
+		UGDC_P=3; Visible("HMMN"); UGDC_F();
+	}
+}
+function PDFM_F(){
+	Point(PDFM_P,10,"PDFM");
+	if(PDFM_P<10){
+		Disable("RKWL"); if(RKWL_P>0){ RKWL_P=0; RKWL_F();}
+	}if(PDFM_P>=10){
+		Visible("RKWL");
+	}if(UGDC_P<3 && PDFM_P>0){
+		UGDC_P=3; Visible("PDFM"); UGDC_F();
+	}
+}
+function FTKS_F(){
+	Point(FTKS_P,10,"FTKS");
+	if(FTKS_P<10){
+		Disable("SGFR"); if(SGFR_P>0){ SGFR_P=0; SGFR_F();}
+	}if(FTKS_P>=10){
+		Visible("SGFR");
+	}if(UGDC_P<3 && FTKS_P>0){
+		UGDC_P=3; Visible("FTKS"); UGDC_F();
+	}
+}
+function SVFY_F(){
+	Point(SVFY_P,10,"SVFY");
+	if(SVFY_P<10){
+		Disable("SDBF"); if(SDBF_P>0){ SDBF_P=0; SDBF_F();}
+	}if(SVFY_P>=10){
+		Visible("SDBF");
+	}if(UGDC_P<3 && SVFY_P>0){
+		UGDC_P=3; Visible("SVFY"); UGDC_F();
+	}
+}
+function AMPB_F(){
+	Point(AMPB_P,1, "AMPB");
+	if(AMPB_P<1){
+		Disable("UGDC"); if(UGDC_P>0){ UGDC_P=0; UGDC_F();}
+		Disable("ENCR"); if(ENCR_P>0){ ENCR_P=0; ENCR_F();}
+	}if(AMPB_P>=1 && DCLS_P>=1){
+		Visible("UGDC");
+	}if(AMPB_P>=1){
+		Visible("ENCR");
+	}
+}
+function ENCR_F(){
+	Point(ENCR_P,1, "ENCR");
+	if(ENCR_P<1){
+		Disable("SCRM"); if(SCRM_P>0){ SCRM_P=0; SCRM_F();}
+	}if(ENCR_P>=1){
+		Visible("SCRM");
+	}if(AMPB_P<1 && ENCR_P>0){
+		AMPB_P=1; Visible("ENCR"); AMPB_F();
+	}
+}
+function LLBY_F(){
+	Point(LLBY_P,1, "LLBY");
+	if(LLBY_P<1){
+		Disable("ABYS"); if(ABYS_P>0){ ABYS_P=0; ABYS_F();}
+	}if(LLBY_P>=1){
+		Visible("ABYS");
+	}if(HMMN_P<10 && LLBY_P>0){
+		HMMN_P=10; Visible("LLBY"); HMMN_F();
+	}
+}
+function MKIM_F(){
+	Point(MKIM_P,5, "MKIM");
+	if(SGFR_P<3 && MKIM_P>0){
+		SGFR_P=3; Visible("MKIM"); SGFR_F();
+	}
+}
+function ETCH_F(){
+	Point(ETCH_P,1, "ETCH");
+	if(RKWL_P<1 && ETCH_P>0){
+		RKWL_P=1; Visible("ETCH"); RKWL_F();
+	}
+}
+function SDBF_F(){
+	Point(SDBF_P,5, "SDBF");
+	if(SDBF_P<3){
+		Disable("NBLG"); if(NBLG_P>0){ NBLG_P=0; NBLG_F();}
+	}if(SDBF_P>=3){
+		Visible("NBLG");
+	}if(SVFY_P<10 && SDBF_P>0){
+		SVFY_P=10; Visible("SDBF"); SVFY_F();
+	}
+}
+function NBLG_F(){
+	Point(NBLG_P,5, "NBLG");
+	if(SDBF_P<3 && NBLG_P>0){
+		SDBF_P=3; Visible("NBLG"); SDBF_F();
+	}
+}
+function RKWL_F(){
+	Point(RKWL_P,1, "RKWL");
+	if(RKWL_P<1){
+		Disable("ETCH"); if(ETCH_P>0){ ETCH_P=0; ETCH_F();}
+	}if(RKWL_P>=1){
+		Visible("ETCH");
+	}if(PDFM_P<10 && RKWL_P>0){
+		PDFM_P=10; Visible("RKWL"); PDFM_F();
+	}
+}
+function ABYS_F(){
+	Point(ABYS_P,1, "ABYS");
+	if(LLBY_P<1 && ABYS_P>0){
+		LLBY_P=1; Visible("ABYS"); LLBY_F();
+	}
+}
+function SGFR_F(){
+	Point(SGFR_P,5, "SGFR");
+	if(SGFR_P<3){
+		Disable("MKIM"); if(MKIM_P>0){ MKIM_P=0; MKIM_F();}
+	}if(SGFR_P>=3){
+		Visible("MKIM");
+	}if(FTKS_P<10 && SGFR_P>0){
+		FTKS_P=10; Visible("SGFR"); FTKS_F();
+	}
+}
+// Gypsy
+function ARVL_F(){
+	Point(ARVL_P,10,"ARVL");
+	if(ALSW_P<5 && ARVL_P>0){
+		ALSW_P=5; Visible("ARVL"); ALSW_F();
+	}if(TRAR_P<1 && ARVL_P>0){
+		TRAR_P=1; Visible("ARVL"); TRAR_F();
+	}
+}
+function MWMF_F(){
+	Point(MWMF_P,5, "MWMF");
+	if(CNCT_P<5 && MWMF_P>0){
+		CNCT_P=5; Visible("MWMF"); CNCT_F();
+	}if(DCLS_P<7 && MWMF_P>0){
+		DCLS_P=7; Visible("MWMF"); DCLS_F();
+	}
+}
+function MRNT_F(){
+	Point(MRNT_P,1, "MRNT");
+	if(MRNT_P<1){
+		Disable("LGFR"); if(LGFR_P>0){ LGFR_P=0; LGFR_F();}
+	}if(MRNT_P>=1 && UGDC_P>=3 && DCLS_P>=10){
+		Visible("LGFR");
+	}if(CNCT_P<10 && MRNT_P>0){
+		CNCT_P=10; Visible("MRNT"); CNCT_F();
+	}if(DCLS_P<5 && MRNT_P>0){
+		DCLS_P=5; Visible("MRNT"); DCLS_F();
+	}
+}
+function LGFR_F(){
+	Point(LGFR_P,5, "LGFR");
+	if(DCLS_P<10 && LGFR_P>0){
+		DCLS_P=10; Visible("LGFR"); DCLS_F();
+	}if(UGDC_P<3 && LGFR_P>0){
+		UGDC_P=3; Visible("LGFR"); UGDC_F();
+	}if(MRNT_P<1 && LGFR_P>0){
+		MRNT_P=1; Visible("LGFR"); MRNT_F();
+	}
+}
+function HRMD_F(){
+	Point(HRMD_P,5, "HRMD");
+	if(CNCT_P<10 && HRMD_P>0){
+		CNCT_P=10; Visible("HRMD"); CNCT_F();
+	}if(DCLS_P<10 && HRMD_P>0){
+		DCLS_P=10; Visible("HRMD"); DCLS_F();
+	}
+}
+function TCOF_F(){
+	Point(TCOF_P,5, "TCOF");
+	if(CNCT_P<10 && TCOF_P>0){
+		CNCT_P=10; Visible("TCOF"); CNCT_F();
+	}if(UGDC_P<3 && TCOF_P>0){
+		UGDC_P=3; Visible("TCOF"); UGDC_F();
+	}
+}
+
+// イベント
+function setPoint(parts,point){
+	if(parts == "ALSW") { if(point>=0 && point<=10) ALSW_P=point; ALSW_F(); }
+	if(parts == "CNCT") { if(point>=0 && point<=10) CNCT_P=point; CNCT_F(); }
+	if(parts == "DBLS") { if(point>=0 && point<=10) DBLS_P=point; DBLS_F(); }
+	if(parts == "OWLE") { if(point>=0 && point<=10) OWLE_P=point; OWLE_F(); }
+	if(parts == "VLTE") { if(point>=0 && point<=10) VLTE_P=point; VLTE_F(); }
+
+	if(parts == "DCLS") { if(point>=0 && point<=10) DCLS_P=point; DCLS_F(); }
+	if(parts == "TRAR") { if(point>=0 && point<=5 ) TRAR_P=point; TRAR_F(); }
+	if(parts == "UGDC") { if(point>=0 && point<=5 ) UGDC_P=point; UGDC_F(); }
+	if(parts == "SCRM") { if(point>=0 && point<=5 ) SCRM_P=point; SCRM_F(); }
+	if(parts == "HMMN") { if(point>=0 && point<=10) HMMN_P=point; HMMN_F(); }
+	if(parts == "PDFM") { if(point>=0 && point<=10) PDFM_P=point; PDFM_F(); }
+	if(parts == "FTKS") { if(point>=0 && point<=10) FTKS_P=point; FTKS_F(); }
+	if(parts == "SVFY") { if(point>=0 && point<=10) SVFY_P=point; SVFY_F(); }
+	if(parts == "AMPB") { if(point>=0 && point<=1 ) AMPB_P=point; AMPB_F(); }
+	if(parts == "ENCR") { if(point>=0 && point<=1 ) ENCR_P=point; ENCR_F(); }
+	if(parts == "LLBY") { if(point>=0 && point<=1 ) LLBY_P=point; LLBY_F(); }
+	if(parts == "MKIM") { if(point>=0 && point<=5 ) MKIM_P=point; MKIM_F(); }
+	if(parts == "ETCH") { if(point>=0 && point<=1 ) ETCH_P=point; ETCH_F(); }
+	if(parts == "SDBF") { if(point>=0 && point<=5 ) SDBF_P=point; SDBF_F(); }
+	if(parts == "NBLG") { if(point>=0 && point<=5 ) NBLG_P=point; NBLG_F(); }
+	if(parts == "RKWL") { if(point>=0 && point<=1 ) RKWL_P=point; RKWL_F(); }
+	if(parts == "ABYS") { if(point>=0 && point<=1 ) ABYS_P=point; ABYS_F(); }
+	if(parts == "SGFR") { if(point>=0 && point<=5 ) SGFR_P=point; SGFR_F(); }
+
+	if(parts == "ARVL") { if(point>=0 && point<=10) ARVL_P=point; ARVL_F(); }
+	if(parts == "MWMF") { if(point>=0 && point<=5 ) MWMF_P=point; MWMF_F(); }
+	if(parts == "MRNT") { if(point>=0 && point<=1 ) MRNT_P=point; MRNT_F(); }
+	if(parts == "LGFR") { if(point>=0 && point<=5 ) LGFR_P=point; LGFR_F(); }
+	if(parts == "HRMD") { if(point>=0 && point<=5 ) HRMD_P=point; HRMD_F(); }
+	if(parts == "TCOF") { if(point>=0 && point<=5 ) TCOF_P=point; TCOF_F(); }
+
+	ShowPoint();
+}
+
+function ShowPoint(){
+	use1 = ALSW_P + CNCT_P + DBLS_P + OWLE_P
+		+ VLTE_P;
+	use2 = DCLS_P + TRAR_P + UGDC_P + SCRM_P
+		+ HMMN_P + PDFM_P + FTKS_P + SVFY_P
+		+ AMPB_P + ENCR_P + LLBY_P + MKIM_P
+		+ ETCH_P + SDBF_P + NBLG_P + RKWL_P
+		+ ABYS_P + SGFR_P
+		+ ARVL_P + MWMF_P + MRNT_P + LGFR_P
+		+ HRMD_P + TCOF_P;
+	showMsg(1);
+}
+
+//コントロール関連
+function Clear(){
+	ALSW_P = CNCT_P = DBLS_P = OWLE_P
+	= VLTE_P
+	= DCLS_P = TRAR_P = UGDC_P = SCRM_P
+	= HMMN_P = PDFM_P = FTKS_P = SVFY_P
+	= AMPB_P = ENCR_P = LLBY_P = MKIM_P
+	= ETCH_P = SDBF_P = NBLG_P = RKWL_P
+	= ABYS_P = SGFR_P
+	= ARVL_P = MWMF_P = MRNT_P = LGFR_P
+	= HRMD_P = TCOF_P
+	= 0;
+	use1 = use2 = 0;
+	ALSW_F(); CNCT_F(); DBLS_F(); OWLE_F();
+	VLTE_F();
+	DCLS_F(); TRAR_F(); UGDC_F(); SCRM_F();
+	HMMN_F(); PDFM_F(); FTKS_F(); SVFY_F();
+	AMPB_F(); ENCR_F(); LLBY_F(); MKIM_F();
+	ETCH_F(); SDBF_F(); NBLG_F(); RKWL_F();
+	ABYS_F(); SGFR_F();
+	ARVL_F(); MWMF_F(); MRNT_F(); LGFR_F();
+	HRMD_F(); TCOF_F();
+	ShowPoint();
+	setAlertLayer("All Points have been cleared.",1);
+}
+
+function Save(mode){
+	var tdata = new Array(30);
+	tdata[0]  = ALSW_P;
+	tdata[1]  = CNCT_P;
+	tdata[2]  = DBLS_P;
+	tdata[3]  = OWLE_P;
+	tdata[4]  = VLTE_P;
+	tdata[5]  = DCLS_P;
+	tdata[6]  = TRAR_P;
+	tdata[7]  = UGDC_P;
+	tdata[8]  = SCRM_P;
+	tdata[9]  = HMMN_P;
+	tdata[10] = PDFM_P;
+	tdata[11] = FTKS_P;
+	tdata[12] = SVFY_P;
+	tdata[13] = AMPB_P;
+	tdata[14] = ENCR_P;
+	tdata[15] = LLBY_P;
+	tdata[16] = MKIM_P;
+	tdata[17] = ETCH_P;
+	tdata[18] = SDBF_P;
+	tdata[19] = NBLG_P;
+	tdata[20] = RKWL_P;
+	tdata[21] = ABYS_P;
+	tdata[22] = SGFR_P;
+	tdata[23] = ARVL_P;
+	tdata[24] = MWMF_P;
+	tdata[25] = MRNT_P;
+	tdata[26] = LGFR_P;
+	tdata[27] = HRMD_P;
+	tdata[28] = TCOF_P;
+	tdata[29] = JCHF_P - 40;
+
+	code = encode(tdata,ver);
+
+	if(mode == "scode"){
+		return code;
+	}if(mode == "cookie"){
+		Save2(code);
+	}
+}
+
+function Load(mode){
+	code = loadType(mode);
+	if(code){
+		tdata = decode(code,ver);
+
+		ALSW_P = tdata[0] ;
+		CNCT_P = tdata[1] ;
+		DBLS_P = tdata[2] ;
+		OWLE_P = tdata[3] ;
+		VLTE_P = tdata[4] ;
+		DCLS_P = tdata[5] ;
+		TRAR_P = tdata[6] ;
+		UGDC_P = tdata[7] ;
+		SCRM_P = tdata[8] ;
+		HMMN_P = tdata[9] ;
+		PDFM_P = tdata[10];
+		FTKS_P = tdata[11];
+		SVFY_P = tdata[12];
+		AMPB_P = tdata[13];
+		ENCR_P = tdata[14];
+		LLBY_P = tdata[15];
+		MKIM_P = tdata[16];
+		ETCH_P = tdata[17];
+		SDBF_P = tdata[18];
+		NBLG_P = tdata[19];
+		RKWL_P = tdata[20];
+		ABYS_P = tdata[21];
+		SGFR_P = tdata[22];
+		ARVL_P = tdata[23];
+		MWMF_P = tdata[24];
+		MRNT_P = tdata[25];
+		LGFR_P = tdata[26];
+		HRMD_P = tdata[27];
+		TCOF_P = tdata[28];
+		JCHF_P = tdata[29] + 40;
+	}
+
+	document.Msg.jobchg1.value = JCHF_P;
+
+	ALSW_F(); CNCT_F(); DBLS_F(); OWLE_F();
+	VLTE_F();
+	DCLS_F(); TRAR_F(); UGDC_F(); SCRM_F();
+	HMMN_F(); PDFM_F(); FTKS_F(); SVFY_F();
+	AMPB_F(); ENCR_F(); LLBY_F(); MKIM_F();
+	ETCH_F(); SDBF_F(); NBLG_F(); RKWL_F();
+	ABYS_F(); SGFR_F();
+	ARVL_F(); MWMF_F(); MRNT_F(); LGFR_F();
+	HRMD_F(); TCOF_F();
+
+	ShowPoint();
+}
+
+</script>
+
+</head>
+
+<div id="bgimg"><img style="filter: drop-shadow(5px 5px 5px #222);" src="img/gyp.png"/></div>
+
+
+
+
+
+<body onload="Init()" onmousewheel="return false;">
+
+<div id="msgid" style="position: absolute; top: 8px; left: 10px; width: 340px; padding: 3px; background-color: rgb(255, 255, 255);"> 1st : <span style="color:#aa0033;">1</span>/50 　2nd : <span style="color:#aa0033;">25</span>/70　rest : 94</div>
+<div style="position:absolute; top:5px; left:390px; width:900px;">
+<form name="Msg">
+Job Change<nobr>
+
+<select name="jobchg1" onchange="JCHF_P=this.value; showMsg()">
+<option value="50" selected="selected">Job50
+</option><option value="49">Job49
+
+</option><option value="48">Job48
+</option><option value="47">Job47
+</option><option value="46">Job46
+</option><option value="45">Job45
+</option><option value="44">Job44
+</option><option value="43">Job43
+</option><option value="42">Job42
+</option><option value="41">Job41
+</option><option value="40">Job40
+</option></select>
+
+　　
+<input type="hidden" name="scode" size="32" value="" readonly="">
+
+<span class="saveoptions_cwn">
+Saved Builds </br>
+<select name="Data" style="width:200px;">
+<option value="1">slot 1 : (pro) </option><option value="2" style="background-color: rgb(204, 204, 204);">slot 2 : (bio) </option><option value="3" style="background-color: rgb(204, 204, 204);">slot 3 : (gyp) </option><option value="4">slot 4 : (pro) </option><option value="5" style="background-color: rgb(204, 204, 204);">slot 5 : (hwz) </option><option value="6">slot 6 : no save</option><option value="7">slot 7 : no save</option><option value="8">slot 8 : no save</option><option value="9">slot 9 : no save</option><option value="10">slot 10 : no save</option><option value="11">slot 11 : no save</option><option value="12">slot 12 : no save</option><option value="13">slot 13 : no save</option><option value="14">slot 14 : no save</option><option value="15">slot 15 : no save</option><option value="16">slot 16 : no save</option><option value="17">slot 17 : no save</option><option value="18">slot 18 : no save</option><option value="19">slot 19 : no save</option><option value="20">slot 20 : no save</option><option value="21">slot 21 : no save</option><option value="22">slot 22 : no save</option><option value="23">slot 23 : no save</option><option value="24">slot 24 : no save</option><option value="25">slot 25 : no save</option><option value="26">slot 26 : no save</option><option value="27">slot 27 : no save</option><option value="28">slot 28 : no save</option><option value="29">slot 29 : no save</option><option value="30">slot 30 : no save</option></select> </br> <p>
+Character Name </br><input type="text" name="chrName" size="20" maxlength="20" title="Name your save slot" style="background-color: #fff; border: 1px solid dimgrey;">　</br> <p>
+<a class="con" href="javascript:Save('cookie');" title="Save to Cookie"> Save Build</a> <a class="con" href="javascript:Load('cookie');" title="Load from Cookie">Load Build</a></br>
+
+<a class="con" href="javascript:Reset();" title="Clear all points">Reset Build</a>
+<a class="con" href="javascript:DeleteSlot();" title="Delete Save Slot">Delete Save Data</a></br>
+<a class="con" href="javascript:codeCopy();" title="Skill Points to URL">Save as URL</a>
+<a class="con" href="JavaScript:setOption2Layer();" title="Show as Text">Show as Text</a> </br>
+
+</form>
+
+
+
+</span>
+
+
+
+
+
+
+</div>
+<div id="navmenu_cln">
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Change Job</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="hpr.html">High Priest</a>    <a href="chp.html">Champion</a> </br>
+    <a href="snp.html" style="width: 55px;">Sniper</a>  <a href="clw.html" style="width: 55px;">Minstrel</a>  <a href="gyp.html" style="width: 55px;">Gypsy</a> </br>
+	    <a href="hwz.html">High Wizard</a>    <a href="pro.html">Scholar</a> </br>
+		    <a href="wsm.html">Mastersmith</a>    <a href="bio.html">Biochemist</a> </br>
+			    <a href="lkt.html">Lord Knight</a>    <a href="pld.html">Paladin</a> </br>
+			    <a href="asc.html">Assassin Cross</a>    <a href="stk.html">Stalker</a> </br>
+  </div>
+  <a class="homebtn" href="https://xellie.com/RO/skill/" title="Home">Homepage</a>　
+</div>
+
+</div>
+
+
+<!-- Archer -->
+
+
+<table class="job" id="ALSW" style="position: absolute; top: 110px; left: 230px; background-position: -840px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_arc.png'); background-position:0px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'ALSW')" onmouseout="msout()">
+Arrow Shower
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="CNCT" style="position: absolute; top: 50px; left: 430px; background-position: -840px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_arc.png'); background-position:-30px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'CNCT')" onmouseout="msout()">
+<font size="1">Improve Concentration</font>
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="DBLS" style="position: absolute; top: 110px; left: 30px; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_arc.png'); background-position:-60px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'DBLS')" onmouseout="msout()">
+Double Strafe
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="OWLE" style="position: absolute; top: 50px; left: 30px; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_arc.png'); background-position:-90px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'OWLE')" onmouseout="msout()">
+Owl's Eye
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="VLTE" style="position: absolute; top: 50px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_arc.png'); background-position:-120px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'VLTE')" onmouseout="msout()">
+Vulture's Eye
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<!-- Dancer -->
+
+
+<table class="job" id="DCLS" style="position: absolute; top: 265px; left: 30px; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_dan.png'); background-position:0px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'DCLS')" onmouseout="msout()">
+Dance Lesson
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="TRAR" style="position: absolute; top: 190px; left: 30px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_dan.png'); background-position:-30px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'TRAR')" onmouseout="msout()">
+Slinging Arrow</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="UGDC" style="position: absolute; top: 385px; left: 30px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_dan.png'); background-position:-60px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'UGDC')" onmouseout="msout()">
+Hip Shaker</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="SCRM" style="position: absolute; top: 630px; left: 430px; background-position: -560px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_dan.png'); background-position:-90px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SCRM')" onmouseout="msout()">
+Dazzler</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="HMMN" style="position: absolute; top: 265px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_dan.png'); background-position:-120px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'HMMN')" onmouseout="msout()">
+Humming</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="PDFM" style="position: absolute; top: 330px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_dan.png'); background-position:-150px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'PDFM')" onmouseout="msout()">
+Pls Don't Forget Me</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="FTKS" style="position: absolute; top: 390px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_dan.png'); background-position:-180px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'FTKS')" onmouseout="msout()">
+Fortune's Kiss</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="SVFY" style="position: absolute; top: 450px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_dan.png'); background-position:-210px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SVFY')" onmouseout="msout()">
+Service for You</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<table class="job" id="AMPB" style="position: absolute; top: 630px; left: 30px; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:0px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'AMPB')" onmouseout="msout()">
+Amp
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="ENCR" style="position: absolute; top: 630px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-30px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'ENCR')" onmouseout="msout()">
+Encore
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="LLBY" style="position: absolute; top: 265px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-60px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'LLBY')" onmouseout="msout()">
+Lullaby
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="MKIM" style="position: absolute; top: 390px; left: 630px; background-position: -560px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-90px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'MKIM')" onmouseout="msout()">
+Mr Kim a Rich Man
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="ETCH" style="position: absolute; top: 330px; left: 630px; background-position: 0px 0px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-120px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'ETCH')" onmouseout="msout()">
+Eternal Chaos
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="SDBF" style="position: absolute; top: 450px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-150px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SDBF')" onmouseout="msout()">
+Drum on Battlefield
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="NBLG" style="position: absolute; top: 450px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-180px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'NBLG')" onmouseout="msout()">
+Ring of Nibelungen
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="RKWL" style="position: absolute; top: 330px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-210px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'RKWL')" onmouseout="msout()">
+Loki's Veil
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="ABYS" style="position: absolute; top: 265px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-240px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'ABYS')" onmouseout="msout()">
+Into the Abyss
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="SGFR" style="position: absolute; top: 390px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_bnd.png'); background-position:-270px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SGFR')" onmouseout="msout()">
+Invulnerable Siegfried</span></td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<!-- Clown -->
+
+
+<table class="job" id="ARVL" style="position: absolute; top: 190px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -840px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cng.png'); background-position:0px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'ARVL')" onmouseout="msout()">
+Arrow Vulcan
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="MWMF" style="position: absolute; top: 190px; left: 630px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cng.png'); background-position:-30px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'MWMF')" onmouseout="msout()">
+Moonlit Water Mill
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="MRNT" style="position: absolute; top: 190px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: 0px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cng.png'); background-position:-60px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'MRNT')" onmouseout="msout()">
+Marionette Control
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="LGFR" style="position: absolute; top: 510px; left: 230px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cng.png'); background-position:-90px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'LGFR')" onmouseout="msout()">
+Longing for Freedom
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="HRMD" style="position: absolute; top: 510px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cng.png'); background-position:-120px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'HRMD')" onmouseout="msout()">
+Wand of Hermode
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<table class="job" id="TCOF" style="position: absolute; top: 570px; left: 430px; background-color: rgb(221, 221, 224); color: rgb(102, 102, 102); border: 0px solid; background-position: -560px 0px;" onclick="msclk(this.id,event.clientX,this.style.left)" onmousewheel="mswhl(this.id)" width="130" height="15" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_cng.png'); background-position:-150px;" width="26">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'TCOF')" onmouseout="msout()">
+Tarot Card of Fate
+</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+<!--Quest Skills-->
+<table class="quest" id="ARCT" style="position:absolute; top:50px; left:830px; background-color:#FFFFCC" width="130" height="15" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFCC">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_quest.png'); background-position:0px;" width="26" align="center">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'ARCT')" onmouseout="msout()">Arrow Crafting</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<table class="quest" id="AREP" style="position:absolute; top:110px; left:830px; background-color:#FFFFCC" width="130" height="15" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFCC">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_quest.png'); background-position:0px;" width="26" align="center">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'AREP')" onmouseout="msout()">Charge Arrow</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<table class="quest" id="SEXY" style="position:absolute; top:190px; left:830px; background-color:#FFFFCC" width="130" height="15" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFCC">
+<tbody><tr><td rowspan="2" style="background-image:url('img/icon_quest.png'); background-position:0px;" width="26" align="center">
+</td>
+<td width="114" height="16" align="center">
+<span class="help" onmouseover="msovr(event.clientX,event.clientY,'SEXY')" onmouseout="msout()">Charming Wink</span>
+</td></tr>
+<tr><td width="114" height="12"></td></tr>
+</tbody></table>
+
+
+<div id="skill" style="position: absolute; z-index: 1; background-color: transparent; border: 0px none; width: 0px; height: 0px; left: 592px; top: 392px;"></div>
+<div id="option1" style="position:absolute; top:0px; left:0px; width:0px; height:0px; background-image:url(img/alpha.png);" onclick="JavaScript:offOptionLayer();"></div>
+<div id="option2" style="position:absolute; top:0px; left:0px; width:0px; height:0px;"></div>
+<div id="dummy" style="position:absolute; top:0px; left:0px; width:1200px; height:800px; z-index:-1;"></div>
+
+
+</body></html>

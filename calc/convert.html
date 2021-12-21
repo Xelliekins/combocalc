@@ -1,0 +1,38 @@
+<input name="calcurl" type="text" maxlength="512" id="calcurl" size=130/>
+
+<script>
+//creates a listener for when you press a key
+window.onkeyup = keyup;
+
+//creates a global Javascript variable
+var calcurl;
+
+function keyup(e) {
+  //setting your input text to the global Javascript Variable for every key press
+  calcurl = e.target.value;
+
+  //listens for you to press the ENTER key, at which point your web address will change to the one you have input in the search box
+  if (e.keyCode == 13) {
+    window.location = calcurl.replace('rocalc.com/#', 'xellie.com/RO/statcalc/calcx.htm?');
+  }
+}
+</script>
+
+
+
+<form id="convertForm">
+  <input type="text" id="convertUrl" />
+  <input type="submit" name="convert" value="Convert" />
+</form>
+
+<script>
+  function convertUrl(e) {
+    const calcurl = document.getElementById("convertUrl").value;
+    if (calcurl) { 
+      window.location = calcurl.replace('rocalc.com/#', 'xellie.com/RO/statcalc/calcx.htm?');
+    }
+  }
+
+  const form = document.getElementById("convertForm");
+  form.addEventListener("submit", convertUrl);
+</script>
